@@ -34,7 +34,7 @@ async function main() {
   console.log(`Deployer: ${wallet.address}`);
   console.log(`Balance: ${formatEther(bal)} BOT`);
 
-  const art = require("../artifacts/contracts/PocketLM.sol/PocketLM.json");
+  const art = require("../artifacts/src/PocketLM.sol/PocketLM.json");
   const factory = new ContractFactory(art.abi, art.bytecode, wallet);
   const contract = await retry("deploy", () => factory.deploy());
   const tx = contract.deploymentTransaction();

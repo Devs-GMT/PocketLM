@@ -14,7 +14,7 @@ An easy NotebookLM: paste text or a short PDF and AI gives a summary, key points
 
 ## Contract
 
-`contracts/PocketLM.sol` (Solidity 0.8.24, no tokens, no payments, no admin).
+`contracts/src/PocketLM.sol` (Solidity 0.8.24, no tokens, no payments, no admin).
 
 | Network | Chain ID | Address |
 |---|---|---|
@@ -23,25 +23,34 @@ An easy NotebookLM: paste text or a short PDF and AI gives a summary, key points
 
 Study ids start at 1. Titles are limited to 80 bytes. `score <= total` and `total > 0` are enforced.
 
+## Project layout
+
+```
+PocketLM/
+  contracts/   Hardhat project: src/PocketLM.sol, test/, scripts/deploy.js, deployments/
+  web/         Next.js app: pages and UI (app/, components/), browser logic and the
+               Groq proxy (app/api/*, lib/), deployed to Vercel
+```
+
 ## Run it locally
 
 ```bash
-npm install
-cp .env.example .env              # deployer key, testnet only
-cp .env.local.example .env.local  # GROQ_API_KEY
-npm run dev                       # http://localhost:3000
-npm run test:contract             # contract tests
-npm run deploy:testnet            # deploys to BOT Chain testnet, writes deployments/botTestnet.json
+npm run install:all                               # installs web/ and contracts/
+cp contracts/.env.example contracts/.env          # deployer key, testnet only
+cp web/.env.local.example web/.env.local          # GROQ_API_KEY
+npm run dev                                       # web app on http://localhost:3000
+npm run test:contract                             # contract tests
+npm run deploy:testnet                            # deploys to BOT Chain testnet, writes contracts/deployments/botTestnet.json
 ```
 
-Secrets live only in `.env` and `.env.local` (both git-ignored). On Vercel, set `GROQ_API_KEY` (and optionally `GROQ_MODEL`) as Environment Variables. The deployer key is never needed there.
+Secrets live only in `contracts/.env` and `web/.env.local` (both git-ignored). On Vercel, set the project's **Root Directory** to `web` and add `GROQ_API_KEY` (and optionally `GROQ_MODEL`) as Environment Variables. The deployer key is never needed there.
 
 ## Mainnet checklist (done by the owner, in Remix)
 
-1. Open `contracts/PocketLM.sol` in Remix. Compiler `0.8.24`, EVM version `paris`, optimizer on (200 runs). No constructor arguments.
+1. Open `contracts/src/PocketLM.sol` in Remix. Compiler `0.8.24`, EVM version `paris`, optimizer on (200 runs). No constructor arguments.
 2. Deploy with the mainnet wallet on BOT Chain (chain ID 677).
 3. In Vercel set `NEXT_PUBLIC_NETWORK=mainnet`, `NEXT_PUBLIC_CONTRACT_MAINNET=<address>` and, if the default is wrong, `NEXT_PUBLIC_MAINNET_RPC=<rpc url>`. Redeploy.
-4. Replace `public/botchain-logo.svg` with the official BOT Chain logo (same file name).
+4. Replace `web/public/botchain-logo.svg` with the official BOT Chain logo (same file name).
 
 ## Limits, said plainly
 

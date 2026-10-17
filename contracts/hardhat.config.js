@@ -10,6 +10,7 @@ module.exports = {
     version: "0.8.24",
     settings: { optimizer: { enabled: true, runs: 200 }, evmVersion: "paris" },
   },
+  paths: { sources: "./src" },
   networks: {
     botTestnet: {
       url: process.env.BOT_TESTNET_RPC || "https://rpc.bohr.life",
