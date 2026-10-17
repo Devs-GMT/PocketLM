@@ -67,18 +67,101 @@ button, input, textarea { font: inherit; color: inherit; }
 .logo { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.01em; }
 .logo svg { color: var(--orange); }
 .nav { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.nav-link { font-family: var(--font-display); font-weight: 500; text-decoration: none; padding: 6px 10px; border-radius: 999px; }
-.nav-link:hover { background: var(--line); }
+.nav-link-plain { font-family: var(--font-display); font-weight: 500; text-decoration: none; padding: 6px 10px; border-radius: 999px; }
+.nav-link-plain:hover { background: var(--line); }
 .net-pill { font-family: var(--font-hand); font-size: 1.2rem; color: var(--orange-deep); border: 1.5px dashed var(--orange); padding: 0 10px; border-radius: 999px; }
 
 /* ---------- landing ---------- */
-.hero { position: relative; overflow: hidden; min-height: clamp(620px, calc(100svh - 76px), 860px); border-radius: 0 0 44px 44px; display: grid; place-items: start center; isolation: isolate; }
-.scene { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; }
+.hero { --hero-h: clamp(620px, calc(100svh - 76px), 860px); position: relative; overflow: hidden; height: var(--hero-h); border-radius: 0 0 44px 44px; display: grid; place-items: start center; isolation: isolate; background: #f6dcba; }
 .hero-copy { position: relative; text-align: center; padding: clamp(28px, 7vh, 72px) 16px 0; display: grid; justify-items: center; }
 .hero-copy::before {
-  content: ""; position: absolute; z-index: -1; inset: -10px -9vw -40px;
-  background: radial-gradient(ellipse at 50% 46%, rgba(255, 247, 234, 0.94) 0%, rgba(255, 247, 234, 0.8) 42%, rgba(255, 247, 234, 0) 72%);
+  content: ""; position: absolute; z-index: -1; inset: -20px -6vw -30px;
+  background: radial-gradient(ellipse at 50% 46%, rgba(255, 249, 238, 0.82) 0%, rgba(255, 249, 238, 0.55) 45%, rgba(255, 249, 238, 0) 72%);
 }
+
+/* hero scene (components/hero/*): everything moves with transform/opacity only */
+.scene { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; }
+.scene text { font-family: var(--font-hand); font-weight: 700; }
+
+/* mascots: breathe, blink, sway the leaf, then hop on the stamp beat (10 s loop) */
+.scene .m-hop { animation: mhop 10s ease-in-out infinite; }
+.scene .m-bob { animation: mbob 3.4s ease-in-out infinite; }
+.scene .m-leaf { animation: mleaf 3.2s ease-in-out infinite alternate; }
+.scene .m-armL { animation: marml 10s ease-in-out infinite; }
+.scene .m-armR { animation: marmr 10s ease-in-out infinite; }
+.scene .m-eye { animation: meye 5.2s linear infinite; }
+@keyframes mbob { 0%, 100% { transform: scale(1.012, 0.985); } 50% { transform: scale(0.99, 1.02); } }
+@keyframes mleaf { from { transform: rotate(-7deg); } to { transform: rotate(8deg); } }
+@keyframes meye { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+@keyframes mhop {
+  0%, 60%, 100% { transform: translateY(0) scale(1, 1); }
+  63% { transform: translateY(8px) scale(1.07, 0.9); }
+  67% { transform: translateY(-78px) scale(0.95, 1.1); }
+  72% { transform: translateY(-6px) scale(1, 1); }
+  75% { transform: translateY(0) scale(1.08, 0.9); }
+  80% { transform: translateY(0) scale(1, 1); }
+}
+@keyframes marml { 0%, 58%, 100% { transform: rotate(-5deg); } 30% { transform: rotate(6deg); } 66%, 74% { transform: rotate(62deg); } 70% { transform: rotate(40deg); } 80% { transform: rotate(-5deg); } }
+@keyframes marmr { 0%, 58%, 100% { transform: rotate(5deg); } 30% { transform: rotate(-6deg); } 66%, 74% { transform: rotate(-62deg); } 70% { transform: rotate(-40deg); } 80% { transform: rotate(5deg); } }
+
+/* people */
+.scene .p-head { animation: nodboy 6s ease-in-out infinite; }
+.scene .p-head-girl { animation: nodgirl 5.2s ease-in-out infinite; }
+.scene .p-head-back { animation: nodback 4s ease-in-out infinite; }
+.scene .p-write { animation: write 0.9s ease-in-out infinite; }
+.scene .p-write-b { animation: writeb 1.05s ease-in-out infinite; }
+.scene .p-breathe { animation: breathe 4s ease-in-out infinite; }
+.scene .p-eyes { animation: blinkgirl 4.6s linear infinite; }
+.scene .p-type { animation: typing 0.32s ease-in-out infinite alternate; }
+.scene .screen { animation: screen 3.2s ease-in-out infinite alternate; }
+.scene .p-climb { animation: climb 12s ease-in-out infinite; }
+.scene .p-reach { animation: reach 3.4s ease-in-out infinite; }
+.scene .p-walk { animation: walkx 38s linear infinite; }
+.scene .leg-a { animation: legs 0.9s ease-in-out infinite alternate; }
+.scene .leg-b { animation: legs 0.9s ease-in-out infinite alternate-reverse; }
+@keyframes nodboy { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(1deg) translateY(2px); } }
+@keyframes nodgirl { 0%, 100% { transform: rotate(3deg); } 50% { transform: rotate(-2.5deg) translateY(2px); } }
+@keyframes nodback { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg) translateY(1.5px); } }
+@keyframes write { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 25% { transform: translate(-6px, 2px) rotate(1.4deg); } 50% { transform: translate(3px, -1px) rotate(-1deg); } 75% { transform: translate(-4px, 3px) rotate(1deg); } }
+@keyframes writeb { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 30% { transform: translate(6px, 2px) rotate(-1.4deg); } 60% { transform: translate(-3px, -1px) rotate(1deg); } }
+@keyframes breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
+@keyframes blinkgirl { 0%, 90%, 100% { transform: scaleY(1); } 93% { transform: scaleY(0.08); } }
+@keyframes typing { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+@keyframes screen { from { opacity: 0.78; } to { opacity: 1; } }
+@keyframes climb { 0%, 100% { transform: translateY(0); } 45%, 55% { transform: translateY(-46px); } }
+@keyframes reach { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+@keyframes walkx { 0% { transform: translateX(0); opacity: 0; } 4% { opacity: 1; } 96% { opacity: 1; } 100% { transform: translateX(1500px); opacity: 0; } }
+@keyframes legs { from { transform: rotate(-22deg); } to { transform: rotate(22deg); } }
+
+/* nature and light */
+.scene .vine { animation: vine 6.5s ease-in-out infinite alternate; }
+.scene .tree-sway { animation: tree 7s ease-in-out infinite alternate; }
+.scene .leaf-sway { animation: tree 5s ease-in-out infinite alternate; }
+.scene .leaf-b { animation-delay: -2s; }
+.scene .shaft-a { animation: shaft 8s ease-in-out infinite alternate; }
+.scene .shaft-b { animation: shaft 11s ease-in-out -4s infinite alternate; }
+.scene .shafts { mix-blend-mode: screen; }
+.scene .streaks { animation: streak 9s ease-in-out infinite alternate; }
+.scene .sunpulse { animation: sunpulse 9s ease-in-out infinite alternate; }
+.scene .lamp-glow { animation: sunpulse 3.5s ease-in-out infinite alternate; }
+.scene .float { animation: floatup 22s linear infinite; opacity: 0; }
+.scene .mote { opacity: 0; animation: mote 6s ease-in-out infinite; }
+@keyframes vine { from { transform: rotate(-2.2deg); } to { transform: rotate(2.6deg); } }
+@keyframes tree { from { transform: rotate(-1.4deg); } to { transform: rotate(1.6deg); } }
+@keyframes shaft { from { opacity: 0.35; } to { opacity: 0.95; } }
+@keyframes streak { from { opacity: 0.08; } to { opacity: 0.22; } }
+@keyframes sunpulse { from { opacity: 0.6; } to { opacity: 1; } }
+@keyframes floatup { 0% { opacity: 0; transform: translate(0, 0); } 12% { opacity: 0.95; } 85% { opacity: 0.95; } 100% { opacity: 0; transform: translate(var(--dx, 40px), -260px); } }
+@keyframes mote { 0%, 100% { opacity: 0; transform: translateY(0); } 50% { opacity: 0.9; transform: translateY(-22px); } }
+
+/* the stamp beat: ring flash, glow and "stamped" text, in step with the mascot hop */
+.scene .st-ring { opacity: 0; animation: stampring 10s ease-out infinite; }
+.scene .st-glow { opacity: 0; animation: stampglow 10s ease-out infinite; }
+.scene .st-text { opacity: 0; font-size: 34px; fill: #d9631f; stroke: #fff3dc; stroke-width: 5px; paint-order: stroke; animation: stamptext 10s ease-out infinite; }
+@keyframes stampring { 0%, 62% { opacity: 0; transform: scale(0.6); } 65% { opacity: 1; transform: scale(0.9); } 76% { opacity: 0.85; transform: scale(1.8); } 84%, 100% { opacity: 0; transform: scale(2.4); } }
+@keyframes stampglow { 0%, 62% { opacity: 0; transform: scale(0.8); } 66% { opacity: 1; transform: scale(1.1); } 82%, 100% { opacity: 0; transform: scale(1.8); } }
+@keyframes stamptext { 0%, 65% { opacity: 0; transform: translateY(10px); } 71% { opacity: 1; transform: translateY(0); } 86% { opacity: 1; transform: translateY(-14px); } 94%, 100% { opacity: 0; transform: translateY(-22px); } }
+
 .hero .greet { display: inline-flex; align-items: center; gap: 10px; transform: rotate(-3deg); margin-bottom: 4px; }
 .hero h1 { font-size: clamp(3.4rem, 11vw, 7.4rem); letter-spacing: -0.03em; }
 .hero .sub { position: relative; margin-top: 18px; font-size: clamp(1.2rem, 3vw, 1.6rem); max-width: 28ch; }
@@ -89,29 +172,6 @@ button, input, textarea { font: inherit; color: inherit; }
 .hero .sub .scrawl svg { position: absolute; left: -4%; bottom: -10px; width: 108%; height: 14px; }
 .hero .cta { margin-top: 26px; display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap; }
 .hero .cta .btn { font-size: 1.2rem; padding: 14px 30px; }
-
-/* hero scene motion: transforms and opacity only */
-.scene .bob { animation: bob 3.6s ease-in-out infinite alternate; }
-.scene .nod { transform-box: fill-box; transform-origin: 50% 100%; animation: nod 5s ease-in-out infinite; }
-.scene .sway { animation: sway 6s ease-in-out infinite alternate; }
-.scene .glow { animation: glowpulse 5s ease-in-out infinite alternate; }
-.scene .ray { animation: ray 7s ease-in-out infinite alternate; }
-.scene .ray2 { animation-delay: -3s; }
-.scene .dust { animation: twinkle 4.5s ease-in-out infinite; }
-.scene .float { animation: floatup 18s linear infinite; opacity: 0; }
-.scene .stamp-glow { transform-box: fill-box; transform-origin: center; animation: stampglow 3.2s ease-in-out infinite; }
-.scene .press-tool { animation: presstool 6s ease-in-out infinite; }
-.scene .press-ring { transform-box: fill-box; transform-origin: center; animation: pressring 6s ease-out infinite; }
-@keyframes bob { to { transform: translateY(-6px); } }
-@keyframes nod { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3.5deg); } }
-@keyframes sway { from { transform: rotate(-1.6deg); } to { transform: rotate(1.6deg); } }
-@keyframes glowpulse { from { opacity: 0.65; } to { opacity: 1; } }
-@keyframes ray { from { opacity: 0.35; } to { opacity: 0.85; } }
-@keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.85; } }
-@keyframes floatup { 0% { transform: translate(0, 0); opacity: 0; } 12% { opacity: 0.95; } 85% { opacity: 0.95; } 100% { transform: translate(var(--dx, 30px), -170px); opacity: 0; } }
-@keyframes stampglow { 0%, 100% { opacity: 0.45; transform: scale(0.94); } 50% { opacity: 1; transform: scale(1.08); } }
-@keyframes presstool { 0%, 55% { transform: translateY(-96px); } 66% { transform: translateY(0); } 76% { transform: translateY(0); } 90%, 100% { transform: translateY(-96px); } }
-@keyframes pressring { 0%, 64% { opacity: 0; transform: scale(1.5); } 68% { opacity: 1; transform: scale(1); } 92% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
 
 .section { padding: 64px 0; }
 .section h2 { font-size: clamp(2rem, 5vw, 3.1rem); letter-spacing: -0.02em; }
@@ -249,8 +309,8 @@ button, input, textarea { font: inherit; color: inherit; }
 }
 .cover-card .psst { font-family: var(--font-hand); color: #fff3e0; font-size: 2.1rem; line-height: 1; text-shadow: 0 1px 0 rgba(42, 29, 16, 0.25); transform: rotate(-2deg); display: inline-block; }
 .cover-body { margin-top: 22px; display: flex; gap: 34px; align-items: center; flex-wrap: wrap; }
-.sticker-link { position: relative; display: block; width: 150px; height: 150px; transform: rotate(-6deg); transition: transform 0.25s ease, filter 0.25s ease; text-decoration: none; flex: none; }
-.sticker { position: absolute; inset: 14px 0 0; background: #fff; border-radius: 18px; display: grid; place-items: center; padding: 14px; box-shadow: 0 2px 0 rgba(42, 29, 16, 0.2), 0 8px 14px rgba(42, 29, 16, 0.2); transform-origin: bottom left; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.sticker-link { position: relative; display: block; width: 240px; height: 118px; transform: rotate(-6deg); transition: transform 0.25s ease, filter 0.25s ease; text-decoration: none; flex: none; }
+.sticker { position: absolute; inset: 14px 0 0; background: #0d1a15; border: 6px solid #fff; border-radius: 22px; display: grid; place-items: center; padding: 14px 20px; box-shadow: 0 2px 0 rgba(42, 29, 16, 0.2), 0 8px 14px rgba(42, 29, 16, 0.2); transform-origin: bottom left; transition: transform 0.25s ease, box-shadow 0.25s ease; }
 .sticker img { width: 100%; height: auto; display: block; }
 .washi { position: absolute; top: 0; left: 50%; width: 84px; height: 28px; margin-left: -42px; transform: rotate(4deg); z-index: 2;
   background: repeating-linear-gradient(45deg, rgba(239, 122, 58, 0.85) 0 8px, rgba(255, 224, 196, 0.85) 8px 16px); opacity: 0.92; box-shadow: 0 1px 0 rgba(42, 29, 16, 0.15); }
@@ -265,7 +325,8 @@ button, input, textarea { font: inherit; color: inherit; }
 /* ---------- small screens ---------- */
 @media (max-width: 760px) {
   .privacy { grid-template-columns: 1fr; }
-  .hero { border-radius: 0 0 28px 28px; min-height: 800px; }
+  .hero { --hero-h: 780px; border-radius: 0 0 28px 28px; }
+  .scene { width: auto; height: 100%; aspect-ratio: 16 / 9; left: 50%; right: auto; translate: -27% 0; }
   .hero-copy { padding-top: 24px; }
   .nb { padding: 16px 14px 16px 30px; border-radius: 20px; }
   .nb::before { left: 9px; width: 8px; background-size: 8px 30px; }
@@ -281,3 +342,123 @@ button, input, textarea { font: inherit; color: inherit; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .thinking svg path { stroke-dashoffset: 0; }
 }
+
+/* ---------- landing navbar (floating pill) ---------- */
+.nav-wrap { position: fixed; inset: 0 0 auto 0; z-index: 50; display: flex; justify-content: center; padding: 24px 12px 0; transition: padding 0.5s ease-out; transform: translateZ(0); }
+.nav-wrap.is-scrolled { padding-top: 18px; }
+.nav-bar { position: relative; display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1280px; height: 68px; padding: 0 4px; border: 1px solid transparent; border-radius: 999px; background: transparent; transition: max-width 0.5s ease-out, height 0.5s ease-out, padding 0.5s ease-out, background-color 0.5s ease-out, border-color 0.5s ease-out, box-shadow 0.5s ease-out, backdrop-filter 0.5s ease-out; }
+.is-scrolled .nav-bar { max-width: 1160px; height: 58px; padding: 0 8px 0 12px; border-color: var(--line); background: rgba(255, 255, 255, 0.6); -webkit-backdrop-filter: blur(16px) saturate(1.5); backdrop-filter: blur(16px) saturate(1.5); box-shadow: 0 12px 40px -16px rgba(42, 29, 16, 0.28); }
+.nav-brand { position: relative; z-index: 2; display: flex; align-items: center; gap: 8px; padding-left: 8px; text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; letter-spacing: -0.01em; }
+.nav-mark { display: inline-flex; transform-origin: 50% 100%; }
+.nav-links { position: absolute; left: 50%; z-index: 2; display: none; align-items: center; gap: 8px; transform: translateX(-50%); transition: gap 0.5s ease-out; }
+.is-scrolled .nav-links { gap: 4px; }
+@media (min-width: 768px) { .nav-links { display: flex; } }
+.nav-pill { position: absolute; left: 0; top: 0; height: 100%; border-radius: 999px; background: var(--ink); pointer-events: none; }
+.nav-link { position: relative; display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 999px; font-family: var(--font-display); font-weight: 500; font-size: 0.92rem; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+.nav-link:hover { color: var(--ink); }
+.nav-link.is-active { color: var(--ink); }
+.is-scrolled .nav-link.is-active { color: var(--cream); }
+.nav-ico { width: 14px; height: 14px; }
+.nav-cta { position: relative; z-index: 2; display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 18px; border: 1.5px solid var(--ink); border-radius: 999px; background: var(--orange); color: #fff; text-decoration: none; font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.16); transition: transform 0.15s ease, background-color 0.2s; }
+.nav-cta:hover { transform: translateY(-1px); background: var(--orange-deep); }
+.nav-chip { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--ink); color: var(--cream); transition: transform 0.2s; }
+.nav-cta:hover .nav-chip { transform: translateX(2px); }
+.nav-arrow { width: 12px; height: 12px; }
+@media (max-width: 480px) { .nav-cta { padding-left: 14px; font-size: 0.88rem; } .nav-brand { font-size: 1.15rem; } }
+
+/* landing: the hero runs under the floating navbar */
+.hero.hero-landing { --hero-h: clamp(660px, 100svh, 920px); border-radius: 0 0 44px 44px; }
+.hero-landing .hero-copy { padding-top: clamp(104px, 17vh, 160px); }
+@media (max-width: 760px) { .hero.hero-landing { --hero-h: 820px; border-radius: 0 0 28px 28px; } .hero-landing .hero-copy { padding-top: 104px; } }
+
+/* FAQ */
+.faq { margin-top: 26px; display: grid; gap: 10px; max-width: 760px; }
+.faq details { border: 1.5px solid var(--ink); border-radius: 18px; background: var(--paper-2); box-shadow: inset 0 -3px 0 rgba(42, 29, 16, 0.06); }
+.faq summary { cursor: pointer; list-style: none; padding: 14px 20px; font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: var(--font-hand); font-size: 1.8rem; line-height: 1; color: var(--orange); transition: transform 0.2s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { padding: 0 20px 16px; color: var(--muted); }
+.section[id], section[id] { scroll-margin-top: 96px; }
+
+/* wallet icon (white PNG used as a mask so it takes the text colour) */
+.wallet-ico { display: inline-block; width: 18px; height: 18px; background: currentColor; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; }
+.final-cta { padding-bottom: 24px; }
+
+/* ---------- Pocket, the landing page guide (.guide-*) ---------- */
+.guide { position: fixed; left: 0; top: 0; z-index: 40; pointer-events: none; user-select: none; }
+.guide.is-menu { z-index: 60; }
+.guide-float, .guide-body { width: 100%; height: 100%; }
+.guide-body { position: relative; pointer-events: auto; touch-action: none; cursor: grab; border-radius: 24px; outline: none; filter: drop-shadow(0 8px 10px rgba(60, 30, 10, 0.25)); }
+.guide-body.is-dragging { cursor: grabbing; }
+.guide-body:focus-visible { box-shadow: 0 0 0 3px var(--orange); }
+.guide-art { display: block; width: 100%; height: 100%; overflow: visible; }
+.guide-x { position: absolute; right: 2px; top: 4px; pointer-events: auto; width: 20px; height: 20px; display: grid; place-items: center; padding: 0; border: 1.5px solid var(--ink); border-radius: 50%; background: var(--cream); color: var(--ink); font-size: 13px; line-height: 1; opacity: 0.6; cursor: pointer; transition: opacity 0.2s; }
+.guide-x:hover, .guide-x:focus-visible { opacity: 1; }
+.guide-stop { position: absolute; left: 50%; top: 94%; translate: -50% 0; pointer-events: auto; white-space: nowrap; padding: 4px 12px; border: 1.5px solid var(--ink); border-radius: 999px; background: var(--cream); font-family: var(--font-display); font-size: 0.8rem; cursor: pointer; }
+.guide-show { position: fixed; left: 18px; bottom: 18px; z-index: 40; padding: 8px 16px; border: 1.5px solid var(--ink); border-radius: 999px; background: var(--cream); color: var(--ink); font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; cursor: pointer; box-shadow: inset 0 -3px 0 rgba(42, 29, 16, 0.1); }
+
+/* speech bubble: cream card, orange border, a tail pointing at Pocket */
+.guide-bubble { position: absolute; bottom: calc(100% - 6px); left: 0; width: max-content; padding: 10px 14px; border: 2px solid var(--orange); border-radius: 18px; background: var(--cream); color: var(--ink); font-family: var(--font-display); font-weight: 500; font-size: 0.92rem; line-height: 1.35; box-shadow: 0 8px 22px rgba(60, 30, 10, 0.22); pointer-events: none; }
+.guide-bubble.is-right { left: auto; right: 0; }
+.guide-bubble.is-below { bottom: auto; top: 100%; margin-top: -4px; }
+.guide-tail { position: absolute; bottom: -7px; left: 28px; width: 11px; height: 11px; background: var(--cream); border-right: 2px solid var(--orange); border-bottom: 2px solid var(--orange); transform: rotate(45deg); }
+.guide-bubble.is-right .guide-tail { left: auto; right: 28px; }
+.guide-bubble.is-below .guide-tail { bottom: auto; top: -7px; border: 0; border-left: 2px solid var(--orange); border-top: 2px solid var(--orange); }
+
+.guide-menu { position: absolute; bottom: calc(100% - 6px); left: 0; width: 214px; display: grid; gap: 2px; padding: 6px; border: 2px solid var(--orange); border-radius: 18px; background: var(--cream); box-shadow: 0 8px 22px rgba(60, 30, 10, 0.22); pointer-events: auto; }
+.guide-menu.is-right { left: auto; right: 0; }
+.guide-menu.is-below { bottom: auto; top: 100%; margin-top: -4px; }
+.guide-menu-item { display: grid; text-align: left; padding: 7px 10px; border: 0; border-radius: 12px; background: transparent; cursor: pointer; font-family: var(--font-display); font-weight: 600; font-size: 0.92rem; color: var(--ink); }
+.guide-menu-item small { font-family: var(--font-body); font-weight: 400; font-size: 0.78rem; color: var(--muted); }
+.guide-menu-item:hover, .guide-menu-item:focus-visible { background: #fff; outline: none; box-shadow: inset 0 0 0 1.5px var(--orange); }
+
+.guide-spark { position: absolute; left: 50%; top: 4%; font-family: var(--font-display); font-weight: 700; font-size: 18px; line-height: 1; text-shadow: 0 0 8px #fff; pointer-events: none; }
+.guide-confetti { position: absolute; left: 50%; top: 35%; width: 9px; height: 5px; border-radius: 1px; pointer-events: none; }
+
+/* body language: breathing, blinking, walking, waving, flailing */
+.guide-bob { animation: guide-breathe 3.4s ease-in-out infinite; }
+.guide-leaf { animation: guide-leaf 3.2s ease-in-out infinite alternate; }
+.guide-eye { transition: transform 90ms; }
+.guide-art.is-blink .guide-eye { transform: scaleY(0.1); }
+.guide-spin { transform-box: fill-box; transform-origin: center; animation: guide-spin 0.9s linear infinite; }
+.guide-art.is-walking .guide-bob { animation: guide-walkbob 0.23s ease-in-out infinite alternate; }
+.guide-art.is-walking .guide-leaf { animation: guide-leaf 0.46s ease-in-out infinite alternate; }
+.guide-art.is-walking .guide-legL { animation: guide-stepL 0.46s ease-in-out infinite alternate; }
+.guide-art.is-walking .guide-legR { animation: guide-stepR 0.46s ease-in-out infinite alternate; }
+.guide-art.is-walking .guide-armL { animation: guide-swingL 0.46s ease-in-out infinite alternate; }
+.guide-art.is-walking .guide-armR { animation: guide-swingR 0.46s ease-in-out infinite alternate; }
+.guide-art.mood-wave .guide-armR { animation: guide-wave 0.5s ease-in-out infinite alternate; }
+.guide-art.mood-falling .guide-armL { animation: guide-flailL 0.14s linear infinite alternate; }
+.guide-art.mood-falling .guide-armR { animation: guide-flailR 0.14s linear infinite alternate; }
+.guide-art.mood-falling .guide-legL { animation: guide-stepL 0.16s linear infinite alternate; }
+.guide-art.mood-falling .guide-legR { animation: guide-stepR 0.16s linear infinite alternate; }
+.guide-art.mood-lifted .guide-armL { transform: rotate(60deg); }
+.guide-art.mood-lifted .guide-armR { transform: rotate(-60deg); }
+.guide-art.mood-lifted .guide-legL { animation: guide-stepL 0.9s ease-in-out infinite alternate; }
+.guide-art.mood-lifted .guide-legR { animation: guide-stepR 0.9s ease-in-out infinite alternate; }
+.guide-art.mood-dizzy .guide-bob { animation: guide-dizzy 0.9s ease-in-out infinite alternate; }
+.guide-art.mood-sleep .guide-bob { animation: guide-sleep 4.2s ease-in-out infinite; transform: translateY(10px) scaleY(0.94); }
+.guide-art.mood-sleep .guide-leaf { animation: none; transform: rotate(-14deg); }
+.guide-art.mood-happy .guide-armL, .guide-art.mood-love .guide-armL { animation: guide-cheerL 0.6s ease-in-out infinite alternate; }
+.guide-art.mood-happy .guide-armR, .guide-art.mood-love .guide-armR { animation: guide-cheerR 0.6s ease-in-out infinite alternate; }
+@keyframes guide-breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.012, 1.02); } }
+@keyframes guide-sleep { 0%, 100% { transform: translateY(10px) scaleY(0.94); } 50% { transform: translateY(8px) scaleY(0.965); } }
+@keyframes guide-dizzy { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+@keyframes guide-walkbob { from { transform: translateY(0); } to { transform: translateY(-9px); } }
+@keyframes guide-leaf { from { transform: rotate(-7deg); } to { transform: rotate(9deg); } }
+@keyframes guide-spin { to { transform: rotate(360deg); } }
+@keyframes guide-stepL { from { transform: rotate(-26deg); } to { transform: rotate(26deg); } }
+@keyframes guide-stepR { from { transform: rotate(26deg); } to { transform: rotate(-26deg); } }
+@keyframes guide-swingL { from { transform: rotate(22deg); } to { transform: rotate(-18deg); } }
+@keyframes guide-swingR { from { transform: rotate(18deg); } to { transform: rotate(-22deg); } }
+@keyframes guide-wave { from { transform: rotate(-95deg); } to { transform: rotate(-45deg); } }
+@keyframes guide-flailL { from { transform: rotate(70deg); } to { transform: rotate(-20deg); } }
+@keyframes guide-flailR { from { transform: rotate(20deg); } to { transform: rotate(-70deg); } }
+@keyframes guide-cheerL { from { transform: rotate(8deg); } to { transform: rotate(30deg); } }
+@keyframes guide-cheerR { from { transform: rotate(-8deg); } to { transform: rotate(-30deg); } }
+@media (max-width: 640px) { .guide-bubble { font-size: 0.85rem; } .guide-x { width: 22px; height: 22px; } }
+@media (prefers-reduced-motion: reduce) { .guide *, .guide-art * { animation: none !important; } }
+
+/* a soft wash under the floating navbar so the logo reads on dark shelves */
+.hero-landing::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 150px; z-index: -1; background: linear-gradient(rgba(255, 247, 232, 0.92), rgba(255, 247, 232, 0)); pointer-events: none; }
