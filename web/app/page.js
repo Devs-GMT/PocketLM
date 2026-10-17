@@ -2,6 +2,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StudyRedirect from "@/components/StudyRedirect";
+import HeroScene from "@/components/HeroScene";
 import { HandWave, Scribble, Lock, Fingerprint, Feather } from "@/components/Icons";
 
 const STEPS = [
@@ -18,45 +19,25 @@ export default function Landing() {
       <Header landing />
       <main>
         <section className="hero">
-          <div className="wrap hero-grid">
-            <div>
-              <div className="greet note">
-                <HandWave size={44} /> Dear students,
-              </div>
-              <h1>
-                meet <span className="lm">pocketLM</span>
-              </h1>
-              <p className="sub">
-                It’s an AI notebook that{" "}
-                <span className="scrawl">
-                  actually!
-                  <Scribble />
-                </span>{" "}
-                helps you learn
-              </p>
-              <div className="cta">
-                <Link href="/app" className="btn btn-primary">Open my notebook</Link>
-                <span className="note-sm">no account needed</span>
-              </div>
+          <HeroScene />
+          <div className="hero-copy">
+            <div className="greet note">
+              <HandWave size={44} /> Dear students,
             </div>
-
-            <div className="mini-nb" aria-hidden="true">
-              <div className="cover">
-                <span className="label">Name: Biology ch. 3</span>
-                <div className="page">
-                  <b>I. Summary</b>
-                  <br />
-                  Plants turn light into sugar inside tiny green factories called chloroplasts…
-                  <br />
-                  <b>IV. Quiz</b> — you scored 4/5
-                </div>
-              </div>
-              <div className="tabs-mini">
-                <span>I</span>
-                <span>II</span>
-                <span>III</span>
-                <span>IV</span>
-              </div>
+            <h1>
+              meet <span className="lm">pocketLM</span>
+            </h1>
+            <p className="sub">
+              It’s an AI notebook that{" "}
+              <span className="scrawl">
+                actually!
+                <Scribble />
+              </span>{" "}
+              helps you learn
+            </p>
+            <div className="cta">
+              <Link href="/app" className="btn btn-primary">Open my notebook</Link>
+              <span className="note-sm">no account needed</span>
             </div>
           </div>
         </section>
