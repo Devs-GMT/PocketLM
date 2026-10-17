@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="BOT Chain">
+  <!-- PLACEHOLDER: replace this file with the official BOT Chain logo (keep the file name). -->
+  <rect x="14" y="14" width="132" height="132" rx="30" fill="#0f1f1a"/>
+  <path d="M52 50h38c14 0 22 7 22 18 0 7-4 12-10 15 8 2 14 8 14 17 0 12-9 20-24 20H52z" fill="none" stroke="#1fcf94" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M52 83h42" stroke="#1fcf94" stroke-width="10" stroke-linecap="round"/>
+</svg>

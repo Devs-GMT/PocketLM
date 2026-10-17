@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+node_modules/
+.next/
+.vercel/
+dist/
+artifacts/
+cache/
+*.log
+.dev.vars
+!.env.local.example
