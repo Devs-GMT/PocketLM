@@ -3,12 +3,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StudyRedirect from "@/components/StudyRedirect";
 import GuideLoader from "@/components/GuideLoader";
-import HeroScene from "@/components/hero/HeroScene";
 import HeroVideo from "@/components/hero/HeroVideo";
 
-// The hero background: a looping video by default. The animated SVG scene is kept:
-// set NEXT_PUBLIC_HERO_BG=scene to switch back to it.
-const HERO_SCENE = process.env.NEXT_PUBLIC_HERO_BG === "scene";
 import HowStage from "@/components/landing/HowStage";
 import { Marquee, Ways, Features, Privacy, Audience, Faq, FinalCta } from "@/components/landing/Sections";
 import ShelfRows from "@/components/landing/ShelfRows";
@@ -25,7 +21,7 @@ export default function Landing() {
       <Header landing />
       <main>
         <section id="top" className="hero hero-landing" data-guide-section="hero">
-          {HERO_SCENE ? <HeroScene /> : <HeroVideo />}
+          <HeroVideo />
           <div className="hero-copy">
             <div className="greet note">
               <HandWave size={44} /> Dear students,

@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 
 // Hero background as a looping video (about 1 MB: VP9 webm for most browsers, H.264 mp4 for Safari).
-// The animated SVG scene (HeroScene) is kept as an alternative: set NEXT_PUBLIC_HERO_BG=scene to use it.
 // With reduced motion, or while the video loads, the poster frame is shown instead.
 //
 // The loop is a crossfade: two copies of the clip are stacked; shortly before the playing one ends, the
