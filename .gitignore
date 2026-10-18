@@ -10,3 +10,6 @@ cache/
 *.log
 .dev.vars
 !.env.local.example
+
+# original 16 MB hero video (the compressed copies live in web/public)
+web/asset/video-background-hero.mp4

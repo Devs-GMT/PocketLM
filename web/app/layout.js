@@ -13,9 +13,15 @@ export const metadata = {
 
 export const viewport = { width: "device-width", initialScale: 1, themeColor: "#fbf8f5" };
 
+// Scroll reveals start hidden only when JS runs (and motion is allowed), so the page is always readable.
+const RV = "if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('rv')";
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${fredoka.variable} ${newsreader.variable} ${caveat.variable}`}>
+    <html lang="en" className={`${fredoka.variable} ${newsreader.variable} ${caveat.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: RV }} />
+      </head>
       <body>
         <WalletProvider>{children}</WalletProvider>
       </body>

@@ -1,17 +1,6 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Shelf from "@/components/Shelf";
+import { redirect } from "next/navigation";
 
-export const metadata = { title: "My shelf — PocketLM" };
-
+// The old "shelf" is now Study records inside the app.
 export default function ShelfPage() {
-  return (
-    <>
-      <Header />
-      <main className="wrap">
-        <Shelf />
-      </main>
-      <Footer />
-    </>
-  );
+  redirect("/app/records");
 }

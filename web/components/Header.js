@@ -56,7 +56,7 @@ export default function Header({ landing = false }) {
     <header className="site-header">
       <div className="wrap">
         <Link href="/" className="logo">
-          <Pencil size={26} /> pocketLM
+          <Pencil size={26} /> PocketLM
         </Link>
         <nav className="nav" aria-label="Main">
           {NETWORK.key === "testnet" && <span className="net-pill">testnet</span>}

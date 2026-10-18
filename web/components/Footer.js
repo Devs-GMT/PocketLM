@@ -1,6 +1,12 @@
+import Link from "next/link";
 import { NETWORK, CONTRACT_ADDRESS, BOTCHAIN_URL, explorerAddress } from "@/lib/config";
 
 const short = (a) => `${a.slice(0, 6)}…${a.slice(-4)}`;
+
+const LINKS = [
+  ["Notebook", [["Open my notebook", "/app"], ["Study records", "/app/records"]]],
+  ["Learn more", [["How it works", "/#how"], ["Privacy", "/#privacy"], ["FAQ", "/#faq"]]],
+];
 
 // The back cover of the notebook.
 export default function Footer() {
@@ -16,6 +22,7 @@ export default function Footer() {
                 <img src="/botchain-logo.svg" alt="" />
               </span>
             </a>
+
             <div className="contract-block">
               <div className="name-label">
                 <small>Contract:</small>
@@ -31,6 +38,21 @@ export default function Footer() {
                 {NETWORK.key === "testnet" ? " (testnet)" : ""}
               </p>
             </div>
+
+            <nav className="cover-links" aria-label="Footer">
+              {LINKS.map(([title, items]) => (
+                <div key={title}>
+                  <h3>{title}</h3>
+                  <ul>
+                    {items.map(([label, href]) => (
+                      <li key={label}>
+                        <Link href={href}>{label}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </nav>
           </div>
         </div>
       </div>

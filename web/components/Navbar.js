@@ -6,7 +6,9 @@ import { MascotIcon } from "@/components/MascotArt";
 
 const NAV = [
   { id: "how", label: "How it works", href: "#how", icon: "flow" },
+  { id: "features", label: "Features", href: "#features", icon: "spark" },
   { id: "privacy", label: "Privacy", href: "#privacy", icon: "shield" },
+  { id: "who", label: "Who it's for", href: "#who", icon: "people" },
   { id: "faq", label: "FAQ", href: "#faq", icon: "question" },
 ];
 
@@ -21,6 +23,21 @@ function Icon({ name }) {
         <circle cx="8" cy="8" r="1.3" />
         <circle cx="13.4" cy="8" r="1.3" />
         <path d="M3.9 8H6.7M9.3 8H12.1" />
+      </svg>
+    );
+  if (name === "spark")
+    return (
+      <svg {...common}>
+        <path d="M8 1.8 9.4 6.6 14.2 8 9.4 9.4 8 14.2 6.6 9.4 1.8 8 6.6 6.6Z" />
+      </svg>
+    );
+  if (name === "people")
+    return (
+      <svg {...common}>
+        <circle cx="6" cy="5.6" r="2.2" />
+        <path d="M1.8 13c.3-2.3 2-3.6 4.2-3.6s3.9 1.3 4.2 3.6" />
+        <circle cx="11.4" cy="6.4" r="1.7" />
+        <path d="M11.2 9.6c1.7.1 3 1.1 3.2 3" />
       </svg>
     );
   if (name === "shield")
@@ -134,7 +151,7 @@ export default function Navbar() {
       <nav className="nav-bar" aria-label="Main">
         <Link href="/" className="nav-brand">
           <MascotLogo />
-          <span>pocketLM</span>
+          <span>PocketLM</span>
         </Link>
 
         <div className="nav-links">

@@ -1,164 +1,99 @@
 "use client";
-import { useState } from "react";
-import Link from "next/link";
-import { useWallet, getEthereum } from "@/lib/wallet";
-import { stampStudy, isUserRejection } from "@/lib/chain";
-import { CONTRACT_ADDRESS, explorerTx } from "@/lib/config";
+import { useEffect, useState } from "react";
 
 const LETTERS = ["A", "B", "C", "D"];
 
-export default function Quiz({ quiz, answers, setAnswers, title, docHash }) {
-  const done = answers.every((a) => a !== null);
+// One question at a time. Right or wrong shows straight away, with the reason.
+// `answers` is kept by the notebook, so leaving the tab (or the page) keeps progress.
+export default function Quiz({ quiz, answers, setAnswers, onFinish, onRetake, stamped }) {
+  const firstOpen = answers.findIndex((a) => a === null);
+  const [qi, setQi] = useState(firstOpen === -1 ? 0 : firstOpen);
+  const [end, setEnd] = useState(firstOpen === -1);
+  const done = firstOpen === -1;
   const score = quiz.reduce((n, q, i) => n + (answers[i] === q.answer ? 1 : 0), 0);
 
-  function pick(qi, oi) {
-    if (answers[qi] !== null) return;
-    setAnswers((a) => a.map((v, i) => (i === qi ? oi : v)));
-  }
-
-  return (
-    <div>
-      <h2 className="h-sec">Quiz</h2>
-      <p className="muted" style={{ marginBottom: 18 }}>Five questions. You’ll see right or wrong straight away.</p>
-
-      {quiz.map((q, qi) => {
-        const picked = answers[qi];
-        return (
-          <section className="q" key={qi} aria-labelledby={`q${qi}`}>
-            <h3 id={`q${qi}`}><span>{qi + 1}.</span>{q.q}</h3>
-            <div className="opts">
-              {q.options.map((o, oi) => {
-                const state = picked === null ? "" : oi === q.answer ? " right" : oi === picked ? " wrong" : "";
-                return (
-                  <button key={oi} className={`opt${state}`} disabled={picked !== null} onClick={() => pick(qi, oi)}>
-                    <b>{LETTERS[oi]}</b>
-                    <span>
-                      {o}
-                      {picked !== null && oi === q.answer && <span className="sr"> (correct answer)</span>}
-                      {picked === oi && oi !== q.answer && <span className="sr"> (your answer, incorrect)</span>}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-            {picked !== null && (
-              <p className="why" role="status">
-                <strong>{picked === q.answer ? "Right. " : "Not quite. "}</strong>
-                {q.why}
-              </p>
-            )}
-          </section>
-        );
-      })}
-
-      {done && <StampPanel score={score} total={quiz.length} title={title} docHash={docHash} />}
-    </div>
-  );
-}
-
-function StampPanel({ score, total, title, docHash }) {
-  const { hasWallet, address, wrongNetwork, connect } = useWallet();
-  const [phase, setPhase] = useState("idle"); // idle | connecting | confirm | pending | done
-  const [error, setError] = useState(null);
-  const [txHash, setTxHash] = useState("");
-  const [result, setResult] = useState(null);
-  const [copied, setCopied] = useState(false);
-
-  const emoji = score === total ? "🏆" : score >= total * 0.6 ? "🎉" : "💪";
-
-  async function stamp() {
-    setError(null);
-    if (!CONTRACT_ADDRESS) {
-      setError("The contract address isn't set for this network yet.");
-      return;
+  useEffect(() => {
+    if (answers.every((a) => a === null)) {
+      setQi(0);
+      setEnd(false);
     }
-    try {
-      setPhase("connecting");
-      if (!address || wrongNetwork) await connect();
-      setPhase("confirm");
-      const out = await stampStudy(getEthereum(), { title, docHash, score, total }, { onSent: (h) => { setTxHash(h); setPhase("pending"); } });
-      setResult(out);
-      setPhase("done");
-    } catch (e) {
-      setPhase("idle");
-      setError(
-        isUserRejection(e)
-          ? "You cancelled the request in your wallet. Nothing was sent."
-          : /insufficient funds/i.test(e?.shortMessage || e?.message || "")
-          ? "Your wallet doesn't have enough BOT to pay the network fee."
-          : "The stamp didn't go through. Check your wallet and try again."
-      );
-    }
-  }
+  }, [answers]);
 
-  async function share() {
-    const url = `${window.location.origin}/app?study=${result.id}`;
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: `I studied "${title}" on PocketLM`, text: `I scored ${score}/${total} on "${title}".`, url });
-        return;
-      }
-    } catch {
-      /* cancelled, fall back to copy */
-    }
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    } catch {
-      window.prompt("Copy this link", url);
-    }
-  }
-
-  if (phase === "done") {
+  if (done && end) {
+    const msg = score === quiz.length ? "Perfect score!" : score >= quiz.length * 0.6 ? "Nice work!" : "Good start. Read the key points and try again.";
     return (
-      <div className="result" role="status">
-        <p className="note">stamped!</p>
-        <h3>{result.id ? `Study #${result.id}` : "Your study is stamped"}</h3>
-        <p style={{ marginTop: 6 }}>“{title}” · {score}/{total}</p>
-        <p className="small tx-line">
-          Transaction: <a href={explorerTx(result.txHash)} target="_blank" rel="noopener noreferrer">{result.txHash}</a>
+      <div className="ap-quiz-end">
+        <div className="ap-score" aria-label={`Score ${score} out of ${quiz.length}`}>
+          <b>{score}</b><span>/ {quiz.length}</span>
+        </div>
+        <h2 className="ap-h3">{msg}</h2>
+        <p className="ap-lede">
+          {stamped ? `Stamped on BOT Chain as Study #${stamped.id ?? "·"}. You can stamp again after a new attempt.` : "Stamp this study on BOT Chain as a proof, or keep it just for yourself."}
         </p>
-        <div className="actions">
-          {result.id && <button className="btn btn-primary" onClick={share}>{copied ? "Link copied" : "Share"}</button>}
-          {result.id && <Link className="btn" href={`/app?study=${result.id}`}>See the proof</Link>}
-          <Link className="btn btn-ghost" href="/shelf">My shelf</Link>
+        <div className="ap-row">
+          <button className="ap-btn is-primary" onClick={onFinish}>{stamped ? "Stamp again" : "Stamp on BOT Chain"}</button>
+          <button className="ap-btn" onClick={() => { setEnd(false); setQi(0); }}>Review answers</button>
+          <button className="ap-btn is-ghost" onClick={onRetake}>Retake quiz</button>
         </div>
       </div>
     );
   }
 
-  const busy = phase !== "idle";
+  const q = quiz[qi];
+  const picked = answers[qi];
+  const last = qi === quiz.length - 1;
+
+  function pick(oi) {
+    if (picked !== null) return;
+    setAnswers(answers.map((v, i) => (i === qi ? oi : v)));
+  }
+
   return (
-    <div className="result">
-      <p className="note">all done!</p>
-      <h3>You scored {score}/{total} {emoji}</h3>
-      <p style={{ marginTop: 8 }}>Stamp it on BOT Chain as a study proof. Only the title, a fingerprint of your notes and the score go on-chain.</p>
-
-      {error && <div className="banner err" role="alert" style={{ marginTop: 14 }}>{error}</div>}
-
-      <div className="actions">
-        {hasWallet === false ? (
-          <a className="btn btn-primary" href="https://metamask.io/download/" target="_blank" rel="noopener noreferrer">Install MetaMask</a>
-        ) : (
-          <button className="btn btn-primary" onClick={stamp} disabled={busy}>
-            {phase === "connecting" ? "Connecting…" : phase === "confirm" ? "Confirm in your wallet…" : phase === "pending" ? "Stamping…" : error ? "Try again" : address && wrongNetwork ? "Switch to BOT Chain & stamp" : "Stamp my study on BOT Chain"}
-          </button>
-        )}
+    <div className="ap-quiz">
+      <div className="ap-qhead">
+        <span>Question {qi + 1} of {quiz.length}</span>
+        <span className="ap-qscore">{answers.filter((a, i) => a !== null && a === quiz[i].answer).length} right so far</span>
+      </div>
+      <div className="ap-bar is-solid" role="progressbar" aria-valuemin={0} aria-valuemax={quiz.length} aria-valuenow={answers.filter((a) => a !== null).length} aria-label="Quiz progress">
+        <i style={{ width: `${(answers.filter((a) => a !== null).length / quiz.length) * 100}%` }} />
       </div>
 
-      {phase === "pending" && txHash && (
-        <p className="small tx-line">
-          Waiting for the network… <a href={explorerTx(txHash)} target="_blank" rel="noopener noreferrer">view transaction</a>
+      <h2 className="ap-q" id={`q${qi}`}>{q.q}</h2>
+      <div className="ap-opts" role="group" aria-labelledby={`q${qi}`}>
+        {q.options.map((o, oi) => {
+          const state = picked === null ? "" : oi === q.answer ? " is-right" : oi === picked ? " is-wrong" : " is-dim";
+          return (
+            <button key={oi} type="button" className={`ap-opt${state}`} disabled={picked !== null} onClick={() => pick(oi)}>
+              <b>{LETTERS[oi]}</b>
+              <span>
+                {o}
+                {picked !== null && oi === q.answer && <span className="sr"> (correct answer)</span>}
+                {picked === oi && oi !== q.answer && <span className="sr"> (your answer, incorrect)</span>}
+              </span>
+              {picked !== null && oi === q.answer && <i aria-hidden="true">✓</i>}
+              {picked === oi && oi !== q.answer && <i aria-hidden="true">✕</i>}
+            </button>
+          );
+        })}
+      </div>
+
+      {picked !== null && (
+        <p className={`ap-why ${picked === q.answer ? "is-right" : "is-wrong"}`} role="status">
+          <strong>{picked === q.answer ? "Right. " : "Not quite. "}</strong>
+          {q.why}
         </p>
       )}
-      <p className="small">
-        {hasWallet === false
-          ? "You need a wallet like MetaMask to stamp. The study kit works without one."
-          : address
-          ? "Your score was graded in your browser, so it is a self-reported study log."
-          : "You'll be asked to connect your wallet first."}
-      </p>
+
+      <div className="ap-qnav">
+        <button className="ap-btn" onClick={() => setQi(qi - 1)} disabled={qi === 0}>← Previous</button>
+        {last ? (
+          <button className="ap-btn is-primary" disabled={picked === null || !done} onClick={() => { setEnd(true); onFinish(); }}>
+            Finish
+          </button>
+        ) : (
+          <button className="ap-btn is-primary" disabled={picked === null} onClick={() => setQi(qi + 1)}>Next →</button>
+        )}
+      </div>
     </div>
   );
 }

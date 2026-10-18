@@ -877,7 +877,7 @@ export default function GuideBot() {
         dg.first = now;
       }
       dg.last = now;
-      if (dg.count >= 2) {
+      if (dg.count >= 1) {
         dg.until = now + 25000;
         dg.count = 0;
         setMood("happy", 1800);
@@ -1185,8 +1185,8 @@ export default function GuideBot() {
         if (!tourRef.current) return;
         sectionKey.current = stop.key;
         const a = spotFor(stop.key);
-        moveTo(a.x, a.y);
-        const trip = reduce ? 200 : 600 + Math.min(4500, (Math.hypot(a.x - posX.get(), a.y - posY.get()) / 230) * 1000);
+        // walk there fast and start talking right away: the bubble travels with Pocket
+        moveTo(a.x, a.y, true);
         tourT = setTimeout(() => {
           if (!tourRef.current) return;
           setMood("happy", 1500);
@@ -1194,7 +1194,7 @@ export default function GuideBot() {
           say(`(${i + 1}/${TOUR.length}) ${stop.line}`, stop.ms);
           if (stop.key === "cta") confetti();
           tourT = setTimeout(() => tourStep(i + 1), stop.ms + 250);
-        }, trip);
+        }, reduce ? 100 : 350);
       }, 120);
     };
     startTourRef.current = () => {
@@ -1209,8 +1209,8 @@ export default function GuideBot() {
       window.addEventListener("keydown", onTourInterrupt);
       setMood("happy", 1500);
       fx("jump");
-      say("Let's go! I'll scroll for you.", 1700);
-      tourT = setTimeout(() => tourStep(0), 1500);
+      say("Let's go! I'll scroll for you.", 1400);
+      tourT = setTimeout(() => tourStep(0), 450);
     };
     stopTourRef.current = stopTour;
 
