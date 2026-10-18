@@ -6,11 +6,25 @@ An easy NotebookLM: paste text or a short PDF and AI gives a summary, key points
 
 1. Paste text or upload a PDF (up to 10 pages / ~20,000 characters). PDF text is read in your browser with pdf.js.
 2. The text goes to our own API route (`/api/study`), which asks Groq for a summary, 5 key points and a 5-question quiz. `/api/ask` answers questions only from your document and quotes the line it used.
-3. Listen uses the browser's built-in voice. Nothing extra is sent anywhere.
-4. The quiz is graded in your browser. Finish it and stamp `title + SHA-256 of the text + score` on BOT Chain.
-5. `My shelf` and `/app?study=ID` read the proof straight from the contract. No database, no accounts.
+3. Listen uses the browser's built-in voice (sentence by sentence, with speed control). Nothing extra is sent anywhere.
+4. The quiz is graded in your browser, one question at a time with the reason after each answer. Finish it and stamp `title + SHA-256 of the text + score` on BOT Chain from a confirmation dialog that shows exactly what goes on-chain.
+5. `Study records` and `/app?study=ID` read the proof straight from the contract. No database, no accounts.
 
 **Only the title, the document hash and the score are on-chain. The document text never is.**
+
+## Screens
+
+| Route | What it is |
+|---|---|
+| `/` | Landing page (hero video with a crossfade loop, how it works, features, FAQ, Pocket the guide) |
+| `/app` | Home: drop a PDF or paste notes, recent notebooks |
+| `/app/new` | Create a notebook (PDF or pasted text) |
+| `/app/notebook?id=` | Summary, Key points, Quiz, Ask, Listen |
+| `/app/notebooks` | My notebooks: search and delete |
+| `/app/records` | Study records read from the contract, with stats and a time filter (`/shelf` redirects here) |
+| `/app/settings` | Wallet, network and contract, delete local data |
+
+Notebooks (your notes, the study kit and quiz progress) are saved **only in your browser** (localStorage, up to 30). Clearing browser data removes them; anything already stamped on-chain stays.
 
 ## Contract
 
