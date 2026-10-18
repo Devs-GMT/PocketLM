@@ -13,6 +13,24 @@ export function getEthereum() {
 }
 
 const hex = (n) => `0x${n.toString(16)}`;
+
+// "Disconnect" in a dapp: wallets cannot be force-disconnected, so besides asking the wallet to revoke
+// the permission we remember the choice here and ignore the wallet's accounts until the user connects again.
+const OFF_KEY = "pocketlm-wallet-off";
+const isOff = () => {
+  try {
+    return localStorage.getItem(OFF_KEY) === "1";
+  } catch {
+    return false;
+  }
+};
+const setOff = (on) => {
+  try {
+    on ? localStorage.setItem(OFF_KEY, "1") : localStorage.removeItem(OFF_KEY);
+  } catch {
+    /* storage blocked */
+  }
+};
 export const shortAddress = (a) => (a ? `${a.slice(0, 6)}…${a.slice(-4)}` : "");
 
 export function WalletProvider({ children }) {
@@ -26,9 +44,11 @@ export function WalletProvider({ children }) {
 
     function attach(eth) {
       setHasWallet(true);
-      eth.request({ method: "eth_accounts" }).then((a) => setAddress(a[0] || null)).catch(() => {});
+      if (!isOff()) eth.request({ method: "eth_accounts" }).then((a) => setAddress(a[0] || null)).catch(() => {});
       eth.request({ method: "eth_chainId" }).then((c) => setChainId(parseInt(c, 16))).catch(() => {});
-      const onAccounts = (a) => setAddress(a[0] || null);
+      const onAccounts = (a) => {
+        if (!isOff()) setAddress(a[0] || null);
+      };
       const onChain = (c) => setChainId(parseInt(c, 16));
       eth.on?.("accountsChanged", onAccounts);
       eth.on?.("chainChanged", onChain);
@@ -99,12 +119,38 @@ export function WalletProvider({ children }) {
     const eth = getEthereum();
     if (!eth) throw new Error("No wallet found.");
     const accounts = await eth.request({ method: "eth_requestAccounts" });
+    setOff(false);
     setAddress(accounts[0] || null);
     const current = parseInt(await eth.request({ method: "eth_chainId" }), 16);
     setChainId(current);
     if (current !== NETWORK.chainId) await switchNetwork();
     return accounts[0];
   }, [switchNetwork]);
+
+  /** Forgets the connected account in PocketLM (and asks the wallet to revoke the permission). */
+  const disconnect = useCallback(async () => {
+    setOff(true);
+    setAddress(null);
+    try {
+      await getEthereum()?.request({ method: "wallet_revokePermissions", params: [{ eth_accounts: {} }] });
+    } catch {
+      /* older wallets: the local choice is enough */
+    }
+  }, []);
+
+  /** Opens the wallet's account picker so another account can be chosen. */
+  const changeAccount = useCallback(async () => {
+    const eth = getEthereum();
+    if (!eth) throw new Error("No wallet found.");
+    try {
+      await eth.request({ method: "wallet_requestPermissions", params: [{ eth_accounts: {} }] });
+    } catch (e) {
+      if (e?.code === 4001) throw e;
+    }
+    const accounts = await eth.request({ method: "eth_requestAccounts" });
+    setOff(false);
+    setAddress(accounts[0] || null);
+  }, []);
 
   const value = useMemo(
     () => ({
@@ -113,9 +159,11 @@ export function WalletProvider({ children }) {
       chainId,
       wrongNetwork: !!address && chainId !== null && chainId !== NETWORK.chainId,
       connect,
+      disconnect,
+      changeAccount,
       switchNetwork,
     }),
-    [hasWallet, address, chainId, connect, switchNetwork]
+    [hasWallet, address, chainId, connect, disconnect, changeAccount, switchNetwork]
   );
 
   return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>;

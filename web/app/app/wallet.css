@@ -1,0 +1,51 @@
+/* wallet button (top right) and its menu */
+.ap-bar-top { display: flex; justify-content: flex-end; padding: 16px clamp(20px, 4vw, 56px) 0; min-height: 60px; }
+.ap-bar-top + .ap-content { padding-top: 12px; }
+.ap-wmenu { position: relative; display: inline-flex; align-items: center; gap: 10px; }
+.ap-wbtn { display: inline-flex; align-items: center; gap: 9px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--ap-line); background: var(--ap-card); color: var(--ap-ink) !important; font: inherit; font-weight: 600; font-size: .95rem; cursor: pointer; text-decoration: none; transition: background .15s, border-color .15s, transform .15s; }
+.ap-wbtn:hover:not(:disabled) { background: #f7f6f2; border-color: #d6d3cb; transform: translateY(-1px); }
+.ap-wbtn:disabled { opacity: .6; cursor: progress; }
+.ap-wbtn.is-primary { background: var(--orange); border-color: var(--orange-deep); color: #fff !important; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .14); }
+.ap-wbtn.is-primary:hover:not(:disabled) { background: var(--orange-deep); }
+.ap-wbtn.is-primary .ap-wallet-ico { background: #fff; }
+.ap-wbtn.is-warn { border-color: #e2b13c; background: #fff8e6; }
+.ap-wbtn.is-ghost { visibility: hidden; }
+.ap-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 3px #e6f3ea; }
+.ap-dot.is-warn { background: #d9a21b; box-shadow: 0 0 0 3px #f8efd2; }
+.ap-wpop { position: absolute; right: 0; top: calc(100% + 8px); z-index: 50; width: 270px; display: grid; padding: 8px; background: var(--ap-card); border: 1px solid var(--ap-line); border-radius: 16px; box-shadow: 0 18px 34px -16px rgba(30, 28, 24, .4); animation: ap-in .18s ease both; }
+.ap-wpop-head { display: grid; gap: 2px; padding: 8px 10px 12px; border-bottom: 1px solid var(--ap-line); margin-bottom: 6px; }
+.ap-wpop-head small { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ap-soft); }
+.ap-wpop-head b { font-size: .98rem; font-weight: 600; }
+.ap-wpop-head span { font-size: .82rem; color: var(--ap-soft); }
+.ap-wpop-head span.is-ok::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--good); margin-right: 6px; vertical-align: 1px; }
+.ap-wpop-head span.is-warn { color: #8a6200; }
+.ap-wpop button { text-align: left; border: 0; background: none; padding: 10px 12px; border-radius: 10px; font: inherit; font-size: .95rem; cursor: pointer; color: var(--ap-ink); }
+.ap-wpop button:hover:not(:disabled) { background: #f1efe9; }
+.ap-wpop button:disabled { opacity: .5; }
+.ap-wpop .is-danger { color: var(--bad); }
+.ap-wpop p { margin: 6px 10px 4px; font-family: var(--font-body); font-size: .85rem; color: var(--ap-soft); }
+.ap-werr { font-family: var(--font-body); font-size: .85rem; color: var(--bad); padding: 4px 10px; }
+.ap-set-wallet { margin: 6px 0 10px; display: flex; }
+.ap-set-wallet .ap-wpop { left: 0; right: auto; }
+@media (max-width: 900px) {
+  .ap-bar-top { display: none; }
+  .ap-top .ap-wbtn { padding: 7px 12px; font-size: .88rem; }
+}
+@media (min-width: 901px) {
+  .ap-top { display: none; }
+}
+
+.ap-bar-top { position: relative; z-index: 40; }
+.ap-top { z-index: 40; }
+
+/* tighter top: the wallet bar is only as tall as its button */
+.ap-bar-top { padding-top: 14px; padding-bottom: 0; min-height: 0; }
+.ap-bar-top + .ap-content { padding-top: 4px; }
+
+/* wallet button a little away from the edge; on Home the greeting shares its row */
+.ap-bar-top { padding-right: clamp(32px, 5vw, 76px); }
+@media (min-width: 901px) {
+  .ap-hello { display: flex; align-items: center; gap: 6px; height: 40px; margin: -44px 0 14px; }
+}
+
+.ap-bar-top { padding-top: 26px; }

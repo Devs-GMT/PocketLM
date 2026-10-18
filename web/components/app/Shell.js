@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import { MascotIcon } from "@/components/MascotArt";
+import WalletMenu from "@/components/app/WalletMenu";
 import { NETWORK } from "@/lib/config";
-import { useWallet, shortAddress } from "@/lib/wallet";
+import { useAppTheme } from "@/lib/theme";
 
 const I = {
   home: <path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z" />,
@@ -28,45 +28,9 @@ const NAV = [
   { href: "/app/settings", label: "Settings", icon: "gear", match: (p) => p.startsWith("/app/settings") },
 ];
 
-export function WalletCard({ compact = false }) {
-  const { hasWallet, address, wrongNetwork, connect, switchNetwork } = useWallet();
-  const [err, setErr] = useState("");
-  async function run(fn) {
-    setErr("");
-    try {
-      await fn();
-    } catch (e) {
-      setErr(e?.code === 4001 ? "Request cancelled." : "Couldn't connect.");
-    }
-  }
-  let line;
-  let action = null;
-  if (hasWallet === null) line = "Looking for a wallet…";
-  else if (hasWallet === false) {
-    line = "No wallet found";
-    action = <a className="ap-mini" href="https://metamask.io/download/" target="_blank" rel="noopener noreferrer">Install</a>;
-  } else if (!address) {
-    line = "Not connected";
-    action = <button className="ap-mini" onClick={() => run(connect)}>Connect</button>;
-  } else if (wrongNetwork) {
-    line = "Wrong network";
-    action = <button className="ap-mini" onClick={() => run(switchNetwork)}>Switch</button>;
-  } else line = `Connected · ${NETWORK.chainName}`;
-
-  return (
-    <div className={`ap-wallet${compact ? " is-compact" : ""}`} title={address || undefined}>
-      <span className="ap-wallet-ico" aria-hidden="true" style={{ WebkitMaskImage: "url(/logo-wallet.png)", maskImage: "url(/logo-wallet.png)" }} />
-      <span className="ap-wallet-txt">
-        <b>{address ? shortAddress(address) : "Wallet"}</b>
-        <small className={address && !wrongNetwork ? "on" : ""}>{err || line}</small>
-      </span>
-      {action}
-    </div>
-  );
-}
-
 export default function Shell({ children }) {
   const path = usePathname() || "/app";
+  useAppTheme();
   return (
     <div className="ap">
       <aside className="ap-side">
@@ -86,7 +50,6 @@ export default function Shell({ children }) {
         </nav>
         <div className="ap-side-foot">
           {NETWORK.key === "testnet" && <span className="ap-testnet">testnet · no real money</span>}
-          <WalletCard />
         </div>
       </aside>
 
@@ -96,8 +59,11 @@ export default function Shell({ children }) {
             <MascotIcon size={26} idp="apt" />
             <span>PocketLM</span>
           </Link>
-          <WalletCard compact />
+          <WalletMenu />
         </header>
+        <div className="ap-bar-top">
+          <WalletMenu />
+        </div>
         <main className="ap-content" id="main">{children}</main>
       </div>
 

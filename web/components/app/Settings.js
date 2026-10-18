@@ -1,11 +1,13 @@
 "use client";
 import { useState } from "react";
-import { WalletCard } from "@/components/app/Shell";
+import WalletMenu from "@/components/app/WalletMenu";
 import { BOTCHAIN_URL, CONTRACT_ADDRESS, NETWORK, explorerAddress } from "@/lib/config";
 import { clearNotebooks, useNotebooks } from "@/lib/notebooks";
+import { setTheme, useTheme } from "@/lib/theme";
 
 export default function Settings() {
   const list = useNotebooks();
+  const theme = useTheme();
   const [sure, setSure] = useState(false);
   const [done, setDone] = useState(false);
 
@@ -15,9 +17,18 @@ export default function Settings() {
       <p className="ap-lede">Where your data lives and which network PocketLM uses.</p>
 
       <section className="ap-panel ap-set">
+        <h2 className="ap-h3">Appearance</h2>
+        <div className="ap-seg" role="radiogroup" aria-label="Theme">
+          <button type="button" role="radio" aria-checked={theme === "light"} className={theme === "light" ? "is-on" : ""} onClick={() => setTheme("light")}>Light</button>
+          <button type="button" role="radio" aria-checked={theme === "dark"} className={theme === "dark" ? "is-on" : ""} onClick={() => setTheme("dark")}>Dark</button>
+        </div>
+        <p className="ap-fine">Light is the default. Your choice is saved in this browser and applies to the app screens.</p>
+      </section>
+
+      <section className="ap-panel ap-set">
         <h2 className="ap-h3">Wallet</h2>
-        <WalletCard />
-        <p className="ap-fine">PocketLM never holds your keys. Your wallet signs each stamp.</p>
+        <div className="ap-set-wallet"><WalletMenu /></div>
+        <p className="ap-fine">You can also connect, change wallet or disconnect from the button at the top right of every screen. PocketLM never holds your keys: your wallet signs each stamp.</p>
       </section>
 
       <section className="ap-panel ap-set">

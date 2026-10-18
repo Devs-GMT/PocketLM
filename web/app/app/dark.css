@@ -1,0 +1,82 @@
+/* Dark look for the app screens: warm charcoal, soft off-white ink, orange kept as the accent.
+   Switched with html[data-app-theme="dark"] (Settings, saved in the browser). Light is the default. */
+html[data-app-theme="dark"] .ap,
+html[data-app-theme="dark"] .ap-modal-bg {
+  --ap-bg: #151514; --ap-side: #1b1a18; --ap-card: #1f1e1b; --ap-line: #34322d; --ap-ink: #ecebe6; --ap-soft: #a29e94; --ap-tint: #2b2a26;
+  --good: #6fcf97; --good-bg: #1e3326; --bad: #ff8f78; --bad-bg: #3a221d; --orange: #f07a38; --orange-deep: #ff9a5c;
+  --ap-surface: #252420; --ap-hover: #2c2b27; --ap-warm: #31291f;
+  color-scheme: dark;
+}
+html[data-app-theme="dark"] .ap-modal-bg { color: var(--ap-ink); }
+
+/* surfaces that had a fixed light color */
+html[data-app-theme="dark"] .ap-drop,
+html[data-app-theme="dark"] .ap-opt,
+html[data-app-theme="dark"] .ap-points li,
+html[data-app-theme="dark"] .ap-rows,
+html[data-app-theme="dark"] .ap-facts,
+html[data-app-theme="dark"] .ap-tr.is-head,
+html[data-app-theme="dark"] .ap-alert,
+html[data-app-theme="dark"] .ap-msg.is-ai > div:not(.ap-dots),
+html[data-app-theme="dark"] .ap-msg blockquote,
+html[data-app-theme="dark"] .ap-paste { background: var(--ap-surface); }
+html[data-app-theme="dark"] .ap-paste:hover,
+html[data-app-theme="dark"] .ap-btn:hover:not(:disabled),
+html[data-app-theme="dark"] .ap-nav a:hover,
+html[data-app-theme="dark"] .ap-btn.is-ghost:hover:not(:disabled),
+html[data-app-theme="dark"] .ap-menu button:hover,
+html[data-app-theme="dark"] .ap-wpop button:hover:not(:disabled),
+html[data-app-theme="dark"] .ap-wbtn:hover:not(:disabled),
+html[data-app-theme="dark"] .ap-tr:not(.is-head):hover,
+html[data-app-theme="dark"] .ap-x:hover,
+html[data-app-theme="dark"] .ap-mini:hover { background: var(--ap-hover); border-color: #4a4740; }
+html[data-app-theme="dark"] .ap-drop:hover,
+html[data-app-theme="dark"] .ap-drop.is-over,
+html[data-app-theme="dark"] .ap-opt:hover:not(:disabled) { background: var(--ap-warm); border-color: var(--orange); }
+html[data-app-theme="dark"] .ap-drop { border-color: #4a4740; }
+html[data-app-theme="dark"] .ap-seg { background: #2a2925; }
+html[data-app-theme="dark"] .ap-skel { background: linear-gradient(100deg, #26251f 30%, #302f2a 50%, #26251f 70%); background-size: 220% 100%; }
+html[data-app-theme="dark"] .ap-wave i { background: #3a3833; }
+html[data-app-theme="dark"] .ap-bar { background: #34322d; }
+html[data-app-theme="dark"] .ap-chip { background: #2f2d29; }
+html[data-app-theme="dark"] .ap-chip.is-stamped { background: #3a2a1e; color: #ffb27c; }
+html[data-app-theme="dark"] .ap-chip.is-done { background: var(--good-bg); color: var(--good); }
+html[data-app-theme="dark"] .ap-chip.is-part { background: #3a3315; color: #e6c95a; }
+html[data-app-theme="dark"] .ap-score-pill { background: #2f2d29; }
+html[data-app-theme="dark"] .ap-empty { background: transparent; }
+html[data-app-theme="dark"] .ap-opt b { background: var(--ap-card); border-color: #4a4740; }
+html[data-app-theme="dark"] .ap-opt.is-right b { background: var(--good); border-color: var(--good); color: #10231a; }
+html[data-app-theme="dark"] .ap-opt.is-wrong b { background: var(--bad); border-color: var(--bad); color: #2a110c; }
+html[data-app-theme="dark"] .ap-why.is-right { color: #9fe0b8; }
+html[data-app-theme="dark"] .ap-why.is-wrong { color: #ffb4a3; }
+html[data-app-theme="dark"] .ap-alert.is-err { background: var(--bad-bg); color: var(--bad); border-color: #6b3a30; }
+html[data-app-theme="dark"] .ap-wbtn.is-warn { background: #33290f; border-color: #8a6a1c; }
+html[data-app-theme="dark"] .ap-dot { box-shadow: 0 0 0 3px #1e3326; }
+html[data-app-theme="dark"] .ap-dot.is-warn { box-shadow: 0 0 0 3px #3a3315; }
+
+/* things that used the ink color as a fill with white text */
+html[data-app-theme="dark"] .ap-nav a.is-on,
+html[data-app-theme="dark"] .ap-nav a.is-on:hover { background: #ecebe6; color: #1d1c1a; }
+html[data-app-theme="dark"] .ap-msg.is-me,
+html[data-app-theme="dark"] .ap-msg.is-me p { color: #1d1c1a; }
+html[data-app-theme="dark"] .ap-pnum { color: #1d1c1a; }
+html[data-app-theme="dark"] .ap-wbtn.is-primary,
+html[data-app-theme="dark"] .ap-btn.is-primary,
+html[data-app-theme="dark"] .ap-newbtn { color: #fff !important; }
+html[data-app-theme="dark"] .ap-btn.is-primary { background: #e8651f; border-color: #c9500f; }
+
+/* bars that were translucent white */
+html[data-app-theme="dark"] .ap-top { background: rgba(27, 26, 24, 0.92); }
+html[data-app-theme="dark"] .ap-tabbar { background: rgba(27, 26, 24, 0.96); }
+html[data-app-theme="dark"] .ap-tabbar a.is-on { background: var(--ap-tint); color: var(--ap-ink); }
+
+/* text colors picked for a light page */
+html[data-app-theme="dark"] .ap-msg blockquote { color: #c9c5ba; border-left-color: var(--ap-soft); }
+html[data-app-theme="dark"] .ap-h1 em,
+html[data-app-theme="dark"] .ap-hand { color: #ff8a47; }
+html[data-app-theme="dark"] .ap-modal { box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7); }
+html[data-app-theme="dark"] .ap-badge { box-shadow: 0 0 0 8px #1e3326; }
+html[data-app-theme="dark"] .ap-badge.is-stamp { box-shadow: 0 0 0 8px #3a2a1e; }
+html[data-app-theme="dark"] .ap-wallet-ico { background: var(--ap-ink); }
+html[data-app-theme="dark"] .ap-wbtn.is-primary .ap-wallet-ico { background: #fff; }
+html[data-app-theme="dark"] .ap :focus-visible { outline-color: rgba(255, 154, 92, 0.7); }
