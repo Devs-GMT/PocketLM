@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="400" viewBox="0 0 360 400" fill="none" role="img" aria-labelledby="title desc">
+<title id="title">PocketLM mascot</title>
+<desc id="desc">A friendly orange guide with a small leaf, big shiny eyes, a smile, rosy cheeks, rounded arms and feet. Every part is a separate named group so it can walk, wave, blink and be thrown.</desc>
+<defs>
+  <radialGradient id="bodyGrad" cx="132" cy="140" r="230" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFB27C"/>
+    <stop offset=".55" stop-color="#FF9257"/>
+    <stop offset="1" stop-color="#F47B42"/>
+  </radialGradient>
+  <linearGradient id="sideShade" x1="250" y1="100" x2="310" y2="300" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#E2663A"/><stop offset="1" stop-color="#C4502D"/>
+  </linearGradient>
+  <linearGradient id="limb" x1="0" y1="0" x2="0" y2="1">
+    <stop stop-color="#FF9A60"/><stop offset="1" stop-color="#F58249"/>
+  </linearGradient>
+  <filter id="soft" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="5"/></filter>
+  <clipPath id="bodyClip">
+    <path d="M180 78C240 76 288 128 296 205C304 280 262 332 180 332C98 332 56 280 64 205C72 128 120 80 180 78Z"/>
+  </clipPath>
+</defs>
+
+<!-- Pivot points for animation (use transform-box:fill-box or these absolute origins):
+     leaf 180 82 | arm-left 76 215 | arm-right 284 215 | leg-left 157 322 | leg-right 205 322 | eyes at their centres. -->
+
+<g id="ground-shadow" opacity=".3">
+  <ellipse cx="180" cy="372" rx="100" ry="9" fill="#9C7F66" filter="url(#soft)"/>
+</g>
+
+<g id="leg-left">
+  <rect x="138" y="312" width="38" height="48" rx="17" transform="rotate(-5 157 322)" fill="url(#limb)" stroke="#30271F" stroke-width="3.5" stroke-linejoin="round"/>
+</g>
+<g id="leg-right">
+  <rect x="186" y="312" width="38" height="48" rx="17" transform="rotate(5 205 322)" fill="url(#limb)" stroke="#30271F" stroke-width="3.5" stroke-linejoin="round"/>
+</g>
+
+<g id="arm-left">
+  <rect x="26" y="202" width="58" height="28" rx="14" transform="rotate(28 76 216)" fill="url(#limb)" stroke="#30271F" stroke-width="3.5" stroke-linejoin="round"/>
+</g>
+<g id="arm-right">
+  <rect x="276" y="202" width="58" height="28" rx="14" transform="rotate(-34 284 216)" fill="url(#limb)" stroke="#30271F" stroke-width="3.5" stroke-linejoin="round"/>
+</g>
+
+<g id="body">
+  <path d="M180 78C240 76 288 128 296 205C304 280 262 332 180 332C98 332 56 280 64 205C72 128 120 80 180 78Z" fill="url(#bodyGrad)" stroke="#30271F" stroke-width="3.5" stroke-linejoin="round"/>
+  <g clip-path="url(#bodyClip)">
+    <path d="M238 84C282 112 306 164 308 224C310 286 280 322 238 334C270 300 280 256 272 204C264 154 254 112 238 84Z" fill="url(#sideShade)" opacity=".85"/>
+    <path d="M90 288C118 322 160 334 206 334C236 334 262 326 282 312C250 338 214 346 176 342C134 338 104 318 90 288Z" fill="#D8663A" opacity=".5"/>
+  </g>
+  <!-- glossy highlight -->
+  <ellipse cx="124" cy="126" rx="24" ry="12" transform="rotate(-38 124 126)" fill="#fff" opacity=".42"/>
+  <ellipse cx="100" cy="158" rx="5" ry="4" fill="#fff" opacity=".38"/>
+</g>
+
+<g id="cheeks" opacity=".5">
+  <ellipse cx="116" cy="210" rx="17" ry="10" fill="#FF5E5E"/>
+  <ellipse cx="244" cy="210" rx="17" ry="10" fill="#FF5E5E"/>
+</g>
+
+<g id="eye-left">
+  <ellipse cx="148" cy="172" rx="12" ry="17" fill="#2E241E"/>
+  <circle cx="152" cy="164" r="4.6" fill="#fff"/>
+  <circle cx="144" cy="180" r="2.2" fill="#fff" opacity=".85"/>
+</g>
+<g id="eye-right">
+  <ellipse cx="212" cy="172" rx="12" ry="17" fill="#2E241E"/>
+  <circle cx="216" cy="164" r="4.6" fill="#fff"/>
+  <circle cx="208" cy="180" r="2.2" fill="#fff" opacity=".85"/>
+</g>
+
+<g id="mouth">
+  <path d="M162 206C170 222 190 222 198 206" stroke="#4B2B20" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M170 214C176 220 184 220 190 214C186 218 174 218 170 214Z" fill="#E8684F" opacity=".75"/>
+</g>
+
+<g id="leaf">
+  <path d="M180 82C179 68 184 56 192 46" stroke="#30271F" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M186 64C176 46 158 40 142 44C144 62 162 74 186 64Z" fill="#6E9B58" stroke="#30271F" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M192 50C192 26 216 12 242 16C242 42 222 60 192 50Z" fill="#86B36E" stroke="#30271F" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M198 44C210 36 222 28 236 22" stroke="#5E8A4A" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+</g>
+</svg>

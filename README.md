@@ -1,6 +1,66 @@
+<div align="center">
+
+<img src="docs/logo.svg" alt="PocketLM mascot" width="110" />
+
 # PocketLM
 
-An easy NotebookLM: paste text or a short PDF and AI gives a summary, key points, a quiz and answers to your questions. Finishing the quiz stamps a study record on BOT Chain.
+**An AI notebook that actually helps you learn, then proves it.**
+
+Paste text or a short PDF and get a summary, 5 key points, a 5-question quiz and answers to your questions. Listen to the summary, finish the quiz, and stamp your study proof (title, a fingerprint of your notes and your score) on BOT Chain. Your notes never leave your browser except to be summarized, and they are never on-chain.
+
+[Verified contract](https://scan.bohr.life/address/0x9e7ad905539f72c3Ae7B8f8637c19EEFBa8B61aA) | [Source](https://github.com/Devs-GMT/PocketLM) | [How it works](#how-it-works) | [Screens](#screenshots) | [Run it locally](#run-it-locally) | [Limits](#limits-said-plainly)
+
+![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636?logo=solidity&logoColor=white)
+![Hardhat tests](https://img.shields.io/badge/Hardhat%20tests-11%20passing-2f7a4b)
+![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs&logoColor=white)
+![Groq](https://img.shields.io/badge/AI-Groq-f55036)
+![BOT Chain](https://img.shields.io/badge/BOT%20Chain-testnet%20live-ee6c27)
+![No accounts](https://img.shields.io/badge/accounts-none-1d1c1a)
+
+<img src="docs/landing-hero.jpg" alt="PocketLM landing page" width="100%" />
+
+</div>
+
+## Screenshots
+
+<table>
+<tr>
+<th width="50%">Home</th>
+<th width="50%">Study kit summary</th>
+</tr>
+<tr>
+<td><img src="docs/app-home.jpg" alt="PocketLM home" /></td>
+<td><img src="docs/app-summary.jpg" alt="Summary tab" /></td>
+</tr>
+<tr>
+<td>Drop a PDF or paste notes. Recent notebooks are saved only in your browser.</td>
+<td>One request makes the summary, 5 key points and a quiz, with the source details beside it.</td>
+</tr>
+<tr>
+<th>Quiz</th>
+<th>Ask your notes</th>
+</tr>
+<tr>
+<td><img src="docs/app-quiz.jpg" alt="Quiz tab" /></td>
+<td><img src="docs/app-ask.jpg" alt="Ask tab" /></td>
+</tr>
+<tr>
+<td>One question at a time. Right or wrong shows straight away, with the reason.</td>
+<td>Answers come only from your document and quote the line they used.</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<th>Landing: how it works</th>
+</tr>
+<tr>
+<td><img src="docs/landing-how.jpg" alt="How it works section" /></td>
+</tr>
+<tr>
+<td>Four pages, one notebook: add notes, get a study kit, ask and quiz yourself, then stamp your study on BOT Chain.</td>
+</tr>
+</table>
 
 ## How it works
 
