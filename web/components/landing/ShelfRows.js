@@ -1,6 +1,6 @@
 // Two rows of stamped notebooks drifting in opposite directions: other people's study shelves.
 // Hover pauses the rows and opens a notebook a little. Example content only.
-const KRAFTS = ["#b98a5e", "#a9784a", "#c79a6c", "#9c7249", "#bf8f62"];
+const KRAFTS = ["#6b8575", "#5d7184", "#c9714f", "#cbb893", "#7b6f86"];
 const BOOKS = [
   ["Biology ch. 3", "4/5"], ["Intro to Solidity", "5/5"], ["History, week 2", "3/5"], ["Calculus limits", "4/5"], ["Cell respiration", "5/5"],
   ["Python basics", "4/5"], ["Macroeconomics", "3/5"], ["Web3 docs", "5/5"], ["Organic chem", "4/5"], ["Philosophy 101", "3/5"],

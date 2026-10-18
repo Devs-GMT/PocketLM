@@ -18,6 +18,7 @@ const pickOne = (a) => a[Math.floor(Math.random() * a.length)];
 const shuffle = (a) => [...a].sort(() => Math.random() - 0.5);
 
 const NAV_H = 92; // the floating navbar
+const STOP_H = 40; // the "Stop tour" button hanging under Pocket
 const ART_RATIO = 400 / 360;
 const PINK = "#FF6F8F";
 const BOUNCE_FROM = 750; // release speed (px/s) from which a thrown Pocket bounces
@@ -202,12 +203,13 @@ export default function GuideBot() {
   }, []);
 
   const say = useCallback(
-    (text, ms = 3200, keep = false) => {
+    (text, ms = 3200, keep = false, at = null) => {
       clearTimeout(bubbleTimer.current);
       sticky.current = keep;
       const d = dimRef.current;
-      const bx = posX.get();
-      const by = posY.get();
+      // `at`: where Pocket is heading, so a bubble said mid-walk is placed for the place it ends up
+      const bx = at ? at.x : posX.get();
+      const by = at ? at.y : posY.get();
       // Put the bubble where it covers nothing: above or below, left or right aligned, wide to narrow.
       const obs = obstacles(d);
       const preferRight = bx + d.w / 2 > d.vw / 2;
@@ -217,11 +219,12 @@ export default function GuideBot() {
         const lines = Math.ceil((text.length * 7) / Math.max(40, w - 30));
         const h = lines * 20 + 26;
         const l = right ? bx + d.w - w : bx;
-        const t = below ? by + d.h - 4 : by + 6 - h;
+        const t = below ? by + d.h - 4 + (tourRef.current ? STOP_H : 0) : by + 6 - h;
         if (l < 4 || l + w > d.vw - 4 || t < 4 || t + h > d.vh - 4) return Infinity;
         return obs.filter((o) => o.l < l + w + 4 && o.r > l - 4 && o.t < t + h + 4 && o.b > t - 4).length;
       };
-      let pick = { below: by < 150, right: preferRight, maxW: Math.min(250, d.vw - 24) };
+      // if nothing fits, use the side with more room (never below when that runs off the screen)
+      let pick = { below: d.vh - (by + d.h) > by, right: preferRight, maxW: Math.min(250, d.vw - 24) };
       let least = Infinity;
       search: for (const maxW of [250, 210, 170]) {
         for (const below of by < 150 ? [true, false] : [false, true]) {
@@ -1191,7 +1194,7 @@ export default function GuideBot() {
           if (!tourRef.current) return;
           setMood("happy", 1500);
           fx("hop");
-          say(`(${i + 1}/${TOUR.length}) ${stop.line}`, stop.ms);
+          say(`(${i + 1}/${TOUR.length}) ${stop.line}`, stop.ms, false, a);
           if (stop.key === "cta") confetti();
           tourT = setTimeout(() => tourStep(i + 1), stop.ms + 250);
         }, reduce ? 100 : 350);
@@ -1264,7 +1267,7 @@ export default function GuideBot() {
   // With reduced motion Pocket keeps one calm pose (the speech bubble still works); in the air it looks excited.
   const shown = reduce ? "idle" : airborne && mood === "idle" ? "happy" : mood;
   return (
-    <motion.div data-guide-bot className={`guide${menu ? " is-menu" : ""}`} style={{ x: posX, y: posY, width: dim.w, height: dim.h }}>
+    <motion.div data-guide-bot className={`guide${menu ? " is-menu" : ""}${touring ? " is-touring" : ""}`} style={{ x: posX, y: posY, width: dim.w, height: dim.h }}>
       <span className="sr" role="status" aria-live="polite">{bubble?.text ?? ""}</span>
 
       {bubble && (

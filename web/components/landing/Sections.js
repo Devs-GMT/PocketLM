@@ -108,7 +108,7 @@ const LISTEN_TEXT = "Photosynthesis turns light into chemical energy inside the 
 
 export function Features() {
   return (
-    <section id="features" className="ln-section ln-features" aria-labelledby="feat-h" data-guide-section="how">
+    <section id="features" className="ln-section ln-features" aria-labelledby="feat-h" data-guide-section="features">
       <Doodle kind="pencil" className="d3" speed={0.16} />
       <Doodle kind="loop" className="d4" speed={-0.08} />
       <div className="wrap">
@@ -154,7 +154,7 @@ export function Features() {
           </article>
 
           <article className="ln-card ln-shelf" data-guide-avoid data-reveal data-delay="220">
-            <h3>Your shelf, and a link to share</h3>
+            <h3>Your records, and a link to share</h3>
             <p>Every stamp is read straight from the contract. Share one as a link anyone can open, no wallet needed.</p>
             <ul aria-hidden="true">
               <li style={{ "--k": 0 }}><span>Biology chapter 3</span><b>4/5</b></li>
@@ -182,7 +182,7 @@ export function Privacy() {
             {[
               [<Lock key="l" />, "Your notes never go on-chain", "The text stays in your browser and is sent to the AI only to make your study kit."],
               [<Fingerprint key="f" />, "Only a fingerprint is stamped", "A hash of the document, its title and your score. Nobody can read your notes from it."],
-              [<Feather key="e" />, "No account, no database", "Your shelf is read straight from the contract with your wallet."],
+              [<Feather key="e" />, "No account, no database", "Your study records are read straight from the contract with your wallet."],
             ].map(([icon, t, p], i) => (
               <li key={t} data-reveal="left" data-delay={i * 120}>
                 {icon}
@@ -210,7 +210,7 @@ const AUDIENCE = [
 
 export function Audience() {
   return (
-    <section id="who" className="ln-section ln-audience" aria-labelledby="aud-h">
+    <section id="who" className="ln-section ln-audience" aria-labelledby="aud-h" data-guide-section="who">
       <div className="wrap">
         <h2 id="aud-h" data-split data-guide-avoid>Made for people who study.</h2>
         <div className="ln-aud-grid">
