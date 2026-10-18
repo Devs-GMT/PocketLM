@@ -6,9 +6,29 @@ const fredoka = Fredoka({ subsets: ["latin"], weight: ["500", "600", "700"], var
 const newsreader = Newsreader({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-newsreader", display: "swap" });
 const caveat = Caveat({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--font-caveat", display: "swap" });
 
+// Absolute base for the preview image. Set NEXT_PUBLIC_SITE_URL to the real domain; on Vercel the
+// production URL is picked up automatically.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
+const TITLE = "PocketLM — an AI notebook that helps you learn";
+const DESCRIPTION = "Paste text or a short PDF and get a summary, key points, a quiz and answers to your questions. Finish the quiz and stamp your study on BOT Chain.";
+
 export const metadata = {
-  title: "PocketLM — an AI notebook that helps you learn",
-  description: "Paste text or a short PDF and get a summary, key points, a quiz and answers to your questions. Finish the quiz and stamp your study on BOT Chain.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: "PocketLM",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "PocketLM: an AI notebook that helps you learn" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/og.png"],
+  },
 };
 
 export const viewport = { width: "device-width", initialScale: 1, themeColor: "#fbf8f5" };

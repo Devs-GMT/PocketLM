@@ -13,3 +13,6 @@ cache/
 
 # original 16 MB hero video (the compressed copies live in web/public)
 web/asset/video-background-hero.mp4
+
+# private launch notes (drafts with placeholders), not for the public repo
+docs/launch-kit.md

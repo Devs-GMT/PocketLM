@@ -2,6 +2,7 @@
   "name": "pocketlm",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "description": "PocketLM: an AI notebook that stamps your study proof on BOT Chain. Apps live in web/ and contracts/.",
   "scripts": {
     "install:all": "npm --prefix web install && npm --prefix contracts install",

@@ -16,6 +16,7 @@ Paste text or a short PDF and get a summary, 5 key points, a 5-question quiz and
 ![Groq](https://img.shields.io/badge/AI-Groq-f55036)
 ![BOT Chain](https://img.shields.io/badge/BOT%20Chain-testnet%20live-ee6c27)
 ![No accounts](https://img.shields.io/badge/accounts-none-1d1c1a)
+[![License: MIT](https://img.shields.io/badge/license-MIT-2f7a4b)](LICENSE)
 
 <img src="docs/landing-hero.jpg" alt="PocketLM landing page" width="100%" />
 
@@ -125,6 +126,10 @@ Secrets live only in `contracts/.env` and `web/.env.local` (both git-ignored). O
 2. Deploy with the mainnet wallet on BOT Chain (chain ID 677).
 3. In Vercel set `NEXT_PUBLIC_NETWORK=mainnet`, `NEXT_PUBLIC_CONTRACT_MAINNET=<address>` and, if the default is wrong, `NEXT_PUBLIC_MAINNET_RPC=<rpc url>`. Redeploy.
 4. Replace `web/public/botchain-logo.svg` with the official BOT Chain logo (same file name).
+
+## License
+
+The code is released under the [MIT License](LICENSE). The PocketLM name and mascot artwork are not covered by it.
 
 ## Limits, said plainly
 
