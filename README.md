@@ -8,7 +8,7 @@
 
 Paste text or a short PDF and get a summary, 5 key points, a 5-question quiz and answers to your questions. Listen to the summary, finish the quiz, and stamp your study proof (title, a fingerprint of your notes and your score) on BOT Chain. Your notes never leave your browser except to be summarized, and they are never on-chain.
 
-[Verified contract](https://scan.bohr.life/address/0x9e7ad905539f72c3Ae7B8f8637c19EEFBa8B61aA) | [Source](https://github.com/Devs-GMT/PocketLM) | [How it works](#how-it-works) | [Screens](#screenshots) | [Run it locally](#run-it-locally) | [Limits](#limits-said-plainly)
+[**Live App**](https://pocketlm.vercel.app/) | [Contract (testnet)](https://scan.bohr.life/address/0x9e7ad905539f72c3Ae7B8f8637c19EEFBa8B61aA) | [Source](https://github.com/Devs-GMT/PocketLM) | [How it works](#how-it-works) | [Screens](#screenshots) | [Run it locally](#run-it-locally) | [Limits](#limits-said-plainly)
 
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636?logo=solidity&logoColor=white)
 ![Hardhat tests](https://img.shields.io/badge/Hardhat%20tests-11%20passing-2f7a4b)
@@ -118,7 +118,19 @@ npm run test:contract                             # contract tests
 npm run deploy:testnet                            # deploys to BOT Chain testnet, writes contracts/deployments/botTestnet.json
 ```
 
-Secrets live only in `contracts/.env` and `web/.env.local` (both git-ignored). On Vercel, set the project's **Root Directory** to `web` and add `GROQ_API_KEY` (and optionally `GROQ_MODEL`) as Environment Variables. The deployer key is never needed there.
+Secrets live only in `contracts/.env` and `web/.env.local` (both git-ignored).
+
+## Deploy
+
+The app is live at **https://pocketlm.vercel.app/** (BOT Chain testnet for now). On Vercel, set the project's **Root Directory** to `web` and add these Environment Variables. The deployer key is never needed there.
+
+| Variable | Value |
+|---|---|
+| `GROQ_API_KEY` | your Groq key (secret) |
+| `GROQ_MODEL` | `openai/gpt-oss-120b` (optional) |
+| `NEXT_PUBLIC_NETWORK` | `testnet` or `mainnet` |
+
+The link preview image and page metadata use the production URL that Vercel provides; set `NEXT_PUBLIC_SITE_URL` only if you use a custom domain.
 
 ## Mainnet checklist (done by the owner, in Remix)
 
