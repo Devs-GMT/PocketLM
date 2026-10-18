@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MascotIcon } from "@/components/MascotArt";
+import Tour from "@/components/app/Tour";
 import WalletMenu from "@/components/app/WalletMenu";
 import { NETWORK } from "@/lib/config";
 import { useAppTheme } from "@/lib/theme";
@@ -75,6 +76,7 @@ export default function Shell({ children }) {
           </Link>
         ))}
       </nav>
+      <Tour />
     </div>
   );
 }

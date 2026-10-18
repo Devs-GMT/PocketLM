@@ -5,7 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { MascotIcon } from "@/components/MascotArt";
 import Proof from "@/components/Proof";
 import { NotebookCard } from "@/components/app/NotebookCard";
+import { WelcomeCard } from "@/components/app/Tour";
 import { greeting, handOffFile, useNotebooks } from "@/lib/notebooks";
+import { startTour, useTourState } from "@/lib/tour";
 import { MAX_PDF_PAGES } from "@/lib/limits";
 
 export default function HomeView() {
@@ -17,6 +19,8 @@ export default function HomeView() {
 function Home() {
   const router = useRouter();
   const list = useNotebooks();
+  const tour = useTourState();
+  const isNew = tour === null && list !== null && list.length === 0; // never offered the tour and nothing saved yet
   const fileRef = useRef(null);
   const [over, setOver] = useState(false);
   const [hello, setHello] = useState("Hello");
@@ -33,6 +37,8 @@ function Home() {
       <p className="ap-hello">{hello} <span aria-hidden="true">👋</span></p>
       <h1 className="ap-h1">What do you want to <em>learn</em> today?</h1>
       <p className="ap-lede">Turn your notes into a summary, key points and a quiz. Then stamp what you finished on BOT Chain.</p>
+
+      {isNew && <WelcomeCard onStart={startTour} />}
 
       <section className="ap-start" aria-label="Start a notebook">
         <label

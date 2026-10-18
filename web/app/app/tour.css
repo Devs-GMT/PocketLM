@@ -1,0 +1,15 @@
+/* first-visit welcome card and coach marks */
+.ob-modal { width: min(440px, 100%); }
+.ob-mascot { animation: ap-bob 3.2s ease-in-out infinite; margin-bottom: 4px; }
+.ob-list { list-style: none; margin: 8px 0 2px; padding: 0; width: 100%; display: grid; gap: 8px; text-align: left; }
+.ob-list li { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border: 1px solid var(--ap-line); border-radius: 12px; background: var(--ap-tint); font-family: var(--font-body); font-size: 1.02rem; }
+.ob-list b { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--orange); color: #fff; font-family: var(--font-display); font-size: .85rem; }
+
+.ob-layer { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
+.ob-spot { position: fixed; border-radius: 20px; box-shadow: 0 0 0 9999px rgba(20, 18, 14, 0.5), 0 0 0 3px var(--orange); transition: top .3s ease, left .3s ease, width .3s ease, height .3s ease; }
+.ob-pop { position: fixed; pointer-events: auto; padding: 16px 18px 14px; background: var(--ap-card); color: var(--ap-ink); border: 1px solid var(--ap-line); border-radius: 18px; box-shadow: 0 22px 44px -16px rgba(0, 0, 0, 0.5); animation: ap-in .25s ease backwards; font-family: var(--font-display); }
+.ob-head { display: flex; align-items: center; gap: 8px; color: var(--ap-soft); font-size: .82rem; font-weight: 500; }
+.ob-pop h2 { margin: 8px 0 4px; font-size: 1.15rem; font-weight: 600; }
+.ob-pop p { margin: 0 0 12px; font-family: var(--font-body); font-size: 1rem; line-height: 1.5; color: var(--ap-soft); }
+.ob-actions { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+@media (prefers-reduced-motion: reduce) { .ob-spot, .ob-pop, .ob-mascot { transition: none !important; animation: none !important; } }

@@ -4,10 +4,13 @@ import WalletMenu from "@/components/app/WalletMenu";
 import { BOTCHAIN_URL, CONTRACT_ADDRESS, NETWORK, explorerAddress } from "@/lib/config";
 import { clearNotebooks, useNotebooks } from "@/lib/notebooks";
 import { setTheme, useTheme } from "@/lib/theme";
+import { startTour } from "@/lib/tour";
+import { useRouter } from "next/navigation";
 
 export default function Settings() {
   const list = useNotebooks();
   const theme = useTheme();
+  const router = useRouter();
   const [sure, setSure] = useState(false);
   const [done, setDone] = useState(false);
 
@@ -23,6 +26,14 @@ export default function Settings() {
           <button type="button" role="radio" aria-checked={theme === "dark"} className={theme === "dark" ? "is-on" : ""} onClick={() => setTheme("dark")}>Dark</button>
         </div>
         <p className="ap-fine">Light is the default. Your choice is saved in this browser and applies to the app screens.</p>
+      </section>
+
+      <section className="ap-panel ap-set">
+        <h2 className="ap-h3">Tutorial</h2>
+        <p className="ap-body">A four-step walkthrough of the app: where to start, what the wallet is for, the study kit, and stamping.</p>
+        <div className="ap-row">
+          <button className="ap-btn" onClick={() => { startTour(); router.push("/app"); }}>Replay tutorial</button>
+        </div>
       </section>
 
       <section className="ap-panel ap-set">
