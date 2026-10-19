@@ -884,12 +884,12 @@ main { overflow-x: clip; }
 .cover-card .psst { font-size: clamp(1.9rem, 3vw, 2.4rem); }
 .cover-body { margin-top: 26px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 26px clamp(28px, 5vw, 64px); align-items: center; }
 .cover-body .sticker-link { justify-self: start; }
-.contract-block { gap: 12px; }
-.contract-block .name-label { justify-self: start; }
+.contract-block { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; }
+.contract-block .stamped { flex-basis: 100%; }
 .name-label { border: 0; border-radius: 14px; padding: 10px 18px; background: #fffaf2; box-shadow: 0 3px 0 rgba(42, 29, 16, 0.18); transform: rotate(0.4deg); }
 .name-label small { color: #8a7358; }
 .cover-card .stamped { color: #fff3e0; font-size: 1rem; line-height: 1.4; }
-.cover-links { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 24px clamp(36px, 6vw, 72px); padding-top: 24px; border-top: 2px dashed rgba(255, 243, 224, 0.4); }
+.cover-links { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px clamp(24px, 4vw, 48px); padding-top: 24px; border-top: 2px dashed rgba(255, 243, 224, 0.4); }
 .cover-links h3 { margin-bottom: 10px; font-family: var(--font-hand); font-weight: 600; font-size: 1.5rem; line-height: 1; color: #fff3e0; }
 .cover-links ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
 .cover-links a { display: inline-flex; align-items: center; gap: 9px; color: #2a1d10; text-decoration: none; white-space: nowrap; font-family: var(--font-display); font-weight: 500; font-size: 1rem; }
@@ -898,7 +898,7 @@ main { overflow-x: clip; }
 .cover-links a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
 @media (max-width: 640px) {
   .cover-body { grid-template-columns: 1fr; }
-  .cover-links { gap: 28px 36px; }
+  .cover-links { grid-template-columns: 1fr 1fr; gap: 28px 24px; }
 }
 
 /* ================= the pinned stage: "Four pages, one notebook" (.hs-*) ================= */

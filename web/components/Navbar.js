@@ -130,6 +130,9 @@ export default function Navbar() {
         const el = document.getElementById(item.id);
         if (el && el.getBoundingClientRect().top - 140 <= 0) current = item.id;
       }
+      // past the end of the last linked section (final call to action, footer): no link is "current"
+      const last = document.getElementById(NAV[NAV.length - 1].id);
+      if (current === NAV[NAV.length - 1].id && last && last.getBoundingClientRect().bottom - 140 <= 0) current = null;
       setActiveId(current);
     };
     onScroll();
