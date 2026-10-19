@@ -8,7 +8,7 @@
 
 Paste text or a short PDF and get a summary, 5 key points, a 5-question quiz and answers to your questions. Listen to the summary, finish the quiz, and stamp your study proof (title, a fingerprint of your notes and your score) on BOT Chain. Your notes never leave your browser except to be summarized, and they are never on-chain.
 
-[**Live App**](https://pocketlm.vercel.app/) | [Contract (mainnet)](https://scan.botchain.ai/address/0xa0AD40C50001DEFcEe354Ec0316b99F78bD6c64f) | [Source](https://github.com/Devs-GMT/PocketLM) | [How it works](#how-it-works) | [Screens](#screenshots) | [Run it locally](#run-it-locally) | [Limits](#limits-said-plainly)
+[**Live App**](https://pocketlm.my.id/) | [Contract (mainnet)](https://scan.botchain.ai/address/0xa0AD40C50001DEFcEe354Ec0316b99F78bD6c64f) | [Source](https://github.com/Devs-GMT/PocketLM) | [How it works](#how-it-works) | [Screens](#screenshots) | [Run it locally](#run-it-locally) | [Limits](#limits-said-plainly)
 
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636?logo=solidity&logoColor=white)
 ![Hardhat tests](https://img.shields.io/badge/Hardhat%20tests-11%20passing-2f7a4b)
@@ -93,7 +93,7 @@ Notebooks (your notes, the study kit and quiz progress) are saved **only in your
 
 | Network | Chain ID | Address |
 |---|---|---|
-| BOT Chain Testnet | 968 | `0x9e7ad905539f72c3Ae7B8f8637c19EEFBa8B61aA` ([scan.bohr.life](https://scan.bohr.life/address/0x9e7ad905539f72c3Ae7B8f8637c19EEFBa8B61aA)) |
+| BOT Chain Testnet (development only) | 968 | `0x9e7ad905539f72c3Ae7B8f8637c19EEFBa8B61aA` ([scan.bohr.life](https://scan.bohr.life/address/0x9e7ad905539f72c3Ae7B8f8637c19EEFBa8B61aA)) |
 | BOT Chain Mainnet | 677 | `0xa0AD40C50001DEFcEe354Ec0316b99F78bD6c64f` ([scan.botchain.ai](https://scan.botchain.ai/address/0xa0AD40C50001DEFcEe354Ec0316b99F78bD6c64f)) |
 
 Study ids start at 1. Titles are limited to 80 bytes. `score <= total` and `total > 0` are enforced.
@@ -122,7 +122,7 @@ Secrets live only in `contracts/.env` and `web/.env.local` (both git-ignored).
 
 ## Deploy
 
-The app is live at **https://pocketlm.vercel.app/** (BOT Chain mainnet). On Vercel, set the project's **Root Directory** to `web` and add these Environment Variables. The deployer key is never needed there.
+The app is live at **https://pocketlm.my.id/** (BOT Chain mainnet). On Vercel, set the project's **Root Directory** to `web` and add these Environment Variables. The deployer key is never needed there.
 
 | Variable | Value |
 |---|---|
@@ -130,7 +130,7 @@ The app is live at **https://pocketlm.vercel.app/** (BOT Chain mainnet). On Verc
 | `GROQ_MODEL` | `openai/gpt-oss-120b` (optional) |
 | `NEXT_PUBLIC_NETWORK` | optional, `mainnet` is the default; set `testnet` only for development |
 
-The link preview image and page metadata use the production URL that Vercel provides; set `NEXT_PUBLIC_SITE_URL` only if you use a custom domain.
+The link preview image and page metadata use the production URL that Vercel provides. With a custom domain (the live app uses `pocketlm.my.id`), set `NEXT_PUBLIC_SITE_URL=https://pocketlm.my.id` so the preview links point to it.
 
 ## Mainnet (done by the owner, in Remix)
 
