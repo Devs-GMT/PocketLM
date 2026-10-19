@@ -16,3 +16,9 @@ web/asset/video-background-hero.mp4
 
 # private launch notes (drafts with placeholders), not for the public repo
 docs/launch-kit.md
+
+# social media assets (X banner and profile pictures), not part of the app
+docs/x-banner.png
+docs/mascot-profile.png
+docs/mascot.png
+docs/x/
