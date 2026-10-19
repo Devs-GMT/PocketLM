@@ -149,7 +149,7 @@ export function Features() {
             <h3>A study proof</h3>
             <p>Finish the quiz and stamp the title, a fingerprint and your score on BOT Chain.</p>
             <div className="ln-chips" aria-hidden="true">
-              <span>title</span><span>fingerprint</span><span>score</span><span className="on">BOT Chain testnet</span>
+              <span>title</span><span>fingerprint</span><span>score</span><span className="on">BOT Chain</span>
             </div>
           </article>
 
@@ -232,10 +232,10 @@ const FAQ = [
   ["Do my notes go on the blockchain?", "No. Only the title, a SHA-256 fingerprint of the text and your score are stamped. Nobody can read your notes from that."],
   ["Does the AI see my notes?", "Yes. The text is sent to an AI service only to make your study kit and to answer your questions. PocketLM itself does not save it, and the AI provider handles it under its own terms, so skip anything private."],
   ["What can I upload?", "Paste text, or upload a PDF of up to 10 pages. Very long text is trimmed to about 20,000 characters, and you are told when that happens. A scanned PDF with no text can't be read, so paste the text instead."],
-  ["Is it free?", "Using the notebook costs nothing right now: no account and no payment. Stamping runs on BOT Chain testnet, so it only costs test BOT, which you can get from the BOT Chain faucet."],
+  ["Is it free?", "Using the notebook costs nothing right now: no account and no payment. Stamping a proof runs on BOT Chain mainnet and costs a small network fee in BOT, paid from your own wallet."],
   ["Does the stamp prove I mastered the topic?", "No. The quiz is graded in your browser, so the score is a self-reported study log. A stamp shows that your wallet logged a result at a certain time, nothing more."],
   ["Can other people see what I stamped?", "Yes. A stamp is public: your wallet address, the title, the score and the date. Your notes are not. Stamps can't be undone, so pick a title you are happy to share."],
-  ["Which network is this?", "BOT Chain testnet for now (chain ID 968). PocketLM adds the network to MetaMask for you the first time you stamp."],
+  ["Which network is this?", "BOT Chain mainnet (chain ID 677). PocketLM adds the network to MetaMask for you the first time you stamp."],
   ["Do I need a wallet?", "Only to stamp. The study kit, the chat and the quiz all work without one."],
 ];
 

@@ -1,7 +1,6 @@
 // One place for everything that differs between testnet and mainnet.
-// Switch with NEXT_PUBLIC_NETWORK=testnet|mainnet (default: testnet).
-// The mainnet contract is deployed; set NEXT_PUBLIC_NETWORK=mainnet in Vercel to use it
-// (NEXT_PUBLIC_CONTRACT_MAINNET overrides the address below).
+// Mainnet is the default. Set NEXT_PUBLIC_NETWORK=testnet to develop against the testnet
+// (NEXT_PUBLIC_CONTRACT_MAINNET / NEXT_PUBLIC_CONTRACT_TESTNET override the addresses below).
 
 const TESTNET = {
   key: "testnet",
@@ -23,7 +22,7 @@ const MAINNET = {
   contract: process.env.NEXT_PUBLIC_CONTRACT_MAINNET || "0xa0AD40C50001DEFcEe354Ec0316b99F78bD6c64f",
 };
 
-export const NETWORK = process.env.NEXT_PUBLIC_NETWORK === "mainnet" ? MAINNET : TESTNET;
+export const NETWORK = process.env.NEXT_PUBLIC_NETWORK === "testnet" ? TESTNET : MAINNET;
 
 export const CONTRACT_ADDRESS = NETWORK.contract;
 export const BOTCHAIN_URL = "https://botchain.ai";

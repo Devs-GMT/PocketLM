@@ -1,6 +1,6 @@
 // What Pocket, the landing page guide, says: the opening greeting, one line per section,
 // the guided tour and its reactions. Claims stay true: PocketLM stamps a study proof on
-// BOT Chain (testnet for now), notes stay in the browser and go to the AI only to make
+// BOT Chain mainnet, notes stay in the browser and go to the AI only to make
 // the study kit.
 
 const pickOne = (a) => a[Math.floor(Math.random() * a.length)];

@@ -8,13 +8,13 @@
 
 Paste text or a short PDF and get a summary, 5 key points, a 5-question quiz and answers to your questions. Listen to the summary, finish the quiz, and stamp your study proof (title, a fingerprint of your notes and your score) on BOT Chain. Your notes never leave your browser except to be summarized, and they are never on-chain.
 
-[**Live App**](https://pocketlm.vercel.app/) | [Contract (mainnet)](https://scan.botchain.ai/address/0xa0AD40C50001DEFcEe354Ec0316b99F78bD6c64f) | [Contract (testnet)](https://scan.bohr.life/address/0x9e7ad905539f72c3Ae7B8f8637c19EEFBa8B61aA) | [Source](https://github.com/Devs-GMT/PocketLM) | [How it works](#how-it-works) | [Screens](#screenshots) | [Run it locally](#run-it-locally) | [Limits](#limits-said-plainly)
+[**Live App**](https://pocketlm.vercel.app/) | [Contract (mainnet)](https://scan.botchain.ai/address/0xa0AD40C50001DEFcEe354Ec0316b99F78bD6c64f) | [Source](https://github.com/Devs-GMT/PocketLM) | [How it works](#how-it-works) | [Screens](#screenshots) | [Run it locally](#run-it-locally) | [Limits](#limits-said-plainly)
 
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636?logo=solidity&logoColor=white)
 ![Hardhat tests](https://img.shields.io/badge/Hardhat%20tests-11%20passing-2f7a4b)
 ![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs&logoColor=white)
 ![Groq](https://img.shields.io/badge/AI-Groq-f55036)
-![BOT Chain](https://img.shields.io/badge/BOT%20Chain-testnet%20live-ee6c27)
+![BOT Chain](https://img.shields.io/badge/BOT%20Chain-mainnet%20live-ee6c27)
 ![No accounts](https://img.shields.io/badge/accounts-none-1d1c1a)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2f7a4b)](LICENSE)
 
@@ -122,13 +122,13 @@ Secrets live only in `contracts/.env` and `web/.env.local` (both git-ignored).
 
 ## Deploy
 
-The app is live at **https://pocketlm.vercel.app/** (BOT Chain testnet for now). On Vercel, set the project's **Root Directory** to `web` and add these Environment Variables. The deployer key is never needed there.
+The app is live at **https://pocketlm.vercel.app/** (BOT Chain mainnet). On Vercel, set the project's **Root Directory** to `web` and add these Environment Variables. The deployer key is never needed there.
 
 | Variable | Value |
 |---|---|
 | `GROQ_API_KEY` | your Groq key (secret) |
 | `GROQ_MODEL` | `openai/gpt-oss-120b` (optional) |
-| `NEXT_PUBLIC_NETWORK` | `testnet` or `mainnet` |
+| `NEXT_PUBLIC_NETWORK` | optional, `mainnet` is the default; set `testnet` only for development |
 
 The link preview image and page metadata use the production URL that Vercel provides; set `NEXT_PUBLIC_SITE_URL` only if you use a custom domain.
 
@@ -138,7 +138,7 @@ The mainnet contract is deployed at `0xa0AD40C50001DEFcEe354Ec0316b99F78bD6c64f`
 
 1. Open `contracts/src/PocketLM.sol` in Remix. Compiler `0.8.24`, EVM version `paris`, optimizer on (200 runs). No constructor arguments.
 2. Deploy with the mainnet wallet on BOT Chain (chain ID 677).
-3. In Vercel set `NEXT_PUBLIC_NETWORK=mainnet` (and `NEXT_PUBLIC_CONTRACT_MAINNET=<address>` only if you deploy a new one; the address above is the default). If the default RPC is wrong, set `NEXT_PUBLIC_MAINNET_RPC=<rpc url>`. Redeploy.
+3. Nothing to set in Vercel: the address above and mainnet are the defaults. Set `NEXT_PUBLIC_CONTRACT_MAINNET=<address>` only if you deploy a new contract, and `NEXT_PUBLIC_MAINNET_RPC=<rpc url>` if the default RPC is wrong. Redeploy.
 4. Replace `web/public/botchain-logo.svg` with the official BOT Chain logo (same file name).
 
 ## License
