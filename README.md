@@ -8,7 +8,7 @@
 
 Paste text or a short PDF and get a summary, 5 key points, a 5-question quiz and answers to your questions. Listen to the summary, finish the quiz, and stamp your study proof (title, a fingerprint of your notes and your score) on BOT Chain. Your notes never leave your browser except to be summarized, and they are never on-chain.
 
-[**Live App**](https://pocketlm.vercel.app/) | [Contract (testnet)](https://scan.bohr.life/address/0x9e7ad905539f72c3Ae7B8f8637c19EEFBa8B61aA) | [Source](https://github.com/Devs-GMT/PocketLM) | [How it works](#how-it-works) | [Screens](#screenshots) | [Run it locally](#run-it-locally) | [Limits](#limits-said-plainly)
+[**Live App**](https://pocketlm.vercel.app/) | [Contract (mainnet)](https://scan.botchain.ai/address/0xa0AD40C50001DEFcEe354Ec0316b99F78bD6c64f) | [Contract (testnet)](https://scan.bohr.life/address/0x9e7ad905539f72c3Ae7B8f8637c19EEFBa8B61aA) | [Source](https://github.com/Devs-GMT/PocketLM) | [How it works](#how-it-works) | [Screens](#screenshots) | [Run it locally](#run-it-locally) | [Limits](#limits-said-plainly)
 
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636?logo=solidity&logoColor=white)
 ![Hardhat tests](https://img.shields.io/badge/Hardhat%20tests-11%20passing-2f7a4b)
@@ -94,7 +94,7 @@ Notebooks (your notes, the study kit and quiz progress) are saved **only in your
 | Network | Chain ID | Address |
 |---|---|---|
 | BOT Chain Testnet | 968 | `0x9e7ad905539f72c3Ae7B8f8637c19EEFBa8B61aA` ([scan.bohr.life](https://scan.bohr.life/address/0x9e7ad905539f72c3Ae7B8f8637c19EEFBa8B61aA)) |
-| BOT Chain Mainnet | 677 | _not deployed yet_ |
+| BOT Chain Mainnet | 677 | `0xa0AD40C50001DEFcEe354Ec0316b99F78bD6c64f` ([scan.botchain.ai](https://scan.botchain.ai/address/0xa0AD40C50001DEFcEe354Ec0316b99F78bD6c64f)) |
 
 Study ids start at 1. Titles are limited to 80 bytes. `score <= total` and `total > 0` are enforced.
 
@@ -132,11 +132,13 @@ The app is live at **https://pocketlm.vercel.app/** (BOT Chain testnet for now).
 
 The link preview image and page metadata use the production URL that Vercel provides; set `NEXT_PUBLIC_SITE_URL` only if you use a custom domain.
 
-## Mainnet checklist (done by the owner, in Remix)
+## Mainnet (done by the owner, in Remix)
+
+The mainnet contract is deployed at `0xa0AD40C50001DEFcEe354Ec0316b99F78bD6c64f`. To reproduce or redeploy:
 
 1. Open `contracts/src/PocketLM.sol` in Remix. Compiler `0.8.24`, EVM version `paris`, optimizer on (200 runs). No constructor arguments.
 2. Deploy with the mainnet wallet on BOT Chain (chain ID 677).
-3. In Vercel set `NEXT_PUBLIC_NETWORK=mainnet`, `NEXT_PUBLIC_CONTRACT_MAINNET=<address>` and, if the default is wrong, `NEXT_PUBLIC_MAINNET_RPC=<rpc url>`. Redeploy.
+3. In Vercel set `NEXT_PUBLIC_NETWORK=mainnet` (and `NEXT_PUBLIC_CONTRACT_MAINNET=<address>` only if you deploy a new one; the address above is the default). If the default RPC is wrong, set `NEXT_PUBLIC_MAINNET_RPC=<rpc url>`. Redeploy.
 4. Replace `web/public/botchain-logo.svg` with the official BOT Chain logo (same file name).
 
 ## License
