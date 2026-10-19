@@ -117,3 +117,68 @@ export function MascotIcon({ size = 28, idp = "pmi", className }) {
     </svg>
   );
 }
+
+/** Round face of the mascot: the small brand mark (navbar, sidebar, avatars, favicon). */
+export function FaceIcon({ size = 28, idp = "pfi", className }) {
+  return (
+    <svg className={className} width={size} height={size} viewBox="0 0 1024 1024" fill="none" aria-hidden="true" focusable="false">
+      <defs>
+        <radialGradient id={`${idp}g`} cx="38%" cy="30%" r="85%">
+          <stop offset="0" stopColor="#ffb27c" />
+          <stop offset=".55" stopColor="#ff9257" />
+          <stop offset="1" stopColor="#f27a40" />
+        </radialGradient>
+        <clipPath id={`${idp}c`}>
+          <circle cx="512" cy="512" r="512" />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${idp}c)`}>
+        <rect width="1024" height="1024" fill={`url(#${idp}g)`} />
+        <ellipse cx="260" cy="230" rx="120" ry="58" transform="rotate(-38 260 230)" fill="#fff" opacity=".28" />
+        <g transform="translate(512 330) scale(1.25)">
+          <path d="M0 0C-2-34 6-64 26-86" stroke="#2a1d10" strokeWidth="14" strokeLinecap="round" />
+          <path d="M8-52C-26-96-84-108-132-92C-124-36-68-4 8-52Z" fill="#5b8f45" />
+          <path d="M26-84C22-150 86-196 168-182C170-108 112-52 26-84Z" fill="#79ad5e" />
+        </g>
+        <ellipse cx="372" cy="560" rx="52" ry="74" fill="#2e241e" />
+        <ellipse cx="652" cy="560" rx="52" ry="74" fill="#2e241e" />
+        <circle cx="390" cy="528" r="19" fill="#fff" />
+        <circle cx="670" cy="528" r="19" fill="#fff" />
+        <circle cx="356" cy="596" r="9" fill="#fff" opacity=".8" />
+        <circle cx="636" cy="596" r="9" fill="#fff" opacity=".8" />
+        <ellipse cx="236" cy="700" rx="68" ry="40" fill="#ff5e5e" opacity=".5" />
+        <ellipse cx="788" cy="700" rx="68" ry="40" fill="#ff5e5e" opacity=".5" />
+        <path d="M440 690C472 764 552 764 584 690" stroke="#4b2b20" strokeWidth="22" strokeLinecap="round" />
+      </g>
+    </svg>
+  );
+}
+
+/** Closing call to action: the mascot stamps a page of notes (the stamp presses down, the mark appears). */
+export function StampScene({ size = 150, idp = "stm", className }) {
+  return (
+    <svg className={className} width={size * (540 / 400)} height={size} viewBox="0 0 540 400" fill="none" aria-hidden="true" focusable="false">
+      <MascotDefs idp={idp} />
+      <MascotArt idp={idp} cls={{ armR: "st-hidearm" }}>
+        {/* the sheet on the ground */}
+        <g className="st-sheet">
+          <path d="M318 286L496 286L528 356L290 356Z" fill="#9C7F66" opacity=".25" transform="translate(4 6)" />
+          <path d="M318 282L496 282L528 352L290 352Z" fill="#FFF9EF" stroke={INK} strokeWidth="3.2" strokeLinejoin="round" />
+          <path d="M392 300H486M386 318H496M380 336H506" stroke="#CDB99D" strokeWidth="3.4" strokeLinecap="round" />
+          <g className="st-mark">
+            <ellipse cx="336" cy="312" rx="30" ry="14" stroke="#E2663A" strokeWidth="4" />
+            <path d="M324 312l8 6 16-14" stroke="#E2663A" strokeWidth="4.4" strokeLinecap="round" strokeLinejoin="round" />
+          </g>
+        </g>
+        {/* the stamp and the arm that holds it move together */}
+        <g className="st-hand" style={{ transformOrigin: "284px 215px" }}>
+          <rect x="319" y="212" width="26" height="28" rx="11" fill="#D8A15F" stroke={INK} strokeWidth="3.2" />
+          <rect x="326" y="238" width="12" height="26" rx="4" fill="#D8A15F" stroke={INK} strokeWidth="3.2" />
+          <rect x="300" y="262" width="64" height="15" rx="6" fill="#B77F43" stroke={INK} strokeWidth="3.2" />
+          <rect x="304" y="277" width="56" height="8" rx="3" fill="#E2663A" stroke={INK} strokeWidth="2.6" />
+          <rect x="276" y="202" width="80" height="28" rx="14" transform="rotate(34 284 216)" fill={`url(#${idp}-limb)`} stroke={INK} strokeWidth="3.5" strokeLinejoin="round" />
+        </g>
+      </MascotArt>
+    </svg>
+  );
+}

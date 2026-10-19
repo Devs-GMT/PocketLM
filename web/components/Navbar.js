@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { animate, motion, useAnimationControls, useMotionValue, useReducedMotion } from "framer-motion";
-import { MascotIcon } from "@/components/MascotArt";
+import { FaceIcon } from "@/components/MascotArt";
 
 const NAV = [
   { id: "how", label: "How it works", href: "#how", icon: "flow" },
@@ -91,7 +91,7 @@ function MascotLogo() {
 
   return (
     <motion.span animate={controls} onHoverStart={hop} onTapStart={hop} className="nav-mark">
-      <MascotIcon size={30} idp="nvm" />
+      <FaceIcon size={30} idp="nvm" />
     </motion.span>
   );
 }

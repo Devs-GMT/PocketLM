@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { MAX_QUESTION_CHARS } from "@/lib/limits";
-import { MascotIcon } from "@/components/MascotArt";
+import { FaceIcon, MascotIcon } from "@/components/MascotArt";
 
 const IDEAS = ["What is the main idea?", "Explain it in simpler words", "Give me an example from the notes"];
 
@@ -67,7 +67,7 @@ export default function AskChat({ text, messages, setMessages }) {
             <div key={i} className="ap-msg is-me"><p>{m.answer}</p></div>
           ) : (
             <div key={i} className="ap-msg is-ai">
-              <span className="ap-avatar" aria-hidden="true"><MascotIcon size={26} idp={`apa${i}`} /></span>
+              <span className="ap-avatar" aria-hidden="true"><FaceIcon size={26} idp={`apa${i}`} /></span>
               <div>
                 <p>{m.answer}</p>
                 {m.quote && <blockquote>{m.quote}</blockquote>}
@@ -78,7 +78,7 @@ export default function AskChat({ text, messages, setMessages }) {
         )}
         {busy && (
           <div className="ap-msg is-ai" aria-label="thinking">
-            <span className="ap-avatar" aria-hidden="true"><MascotIcon size={26} idp="apat" /></span>
+            <span className="ap-avatar" aria-hidden="true"><FaceIcon size={26} idp="apat" /></span>
             <div className="ap-dots"><i /><i /><i /></div>
           </div>
         )}

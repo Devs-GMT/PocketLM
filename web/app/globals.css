@@ -1223,3 +1223,13 @@ main { overflow-x: clip; }
 .ln-final-card .ln-note { color: #fff3e0; }
 .ln-section .ln-final-card .note-sm, .ln-section .ln-final-card .ln-note { color: #fff3e0; }
 .cover-card, .ln-final-card { background-color: #b98a5e; }
+
+/* closing call to action: the mascot stamps a page of notes */
+.ln-final-mascot svg.st-scene, .ln-final-mascot svg { overflow: visible; }
+.ln-final-mascot .st-hidearm { display: none; }
+.ln-final-mascot .st-hand { transform: translateY(-14px) rotate(-4deg); animation: st-press 4.4s ease-in-out infinite; }
+.ln-final-mascot .st-mark { opacity: 1; transform-box: fill-box; transform-origin: center; animation: st-mark 4.4s ease-in-out infinite; }
+.ln-final-mascot svg { animation: none; }
+@keyframes st-press { 0%, 30% { transform: translateY(-16px) rotate(-5deg); } 48%, 60% { transform: translateY(0) rotate(0); } 78%, 100% { transform: translateY(-16px) rotate(-5deg); } }
+@keyframes st-mark { 0%, 47% { opacity: 0; transform: scale(1.5); } 56%, 90% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .ln-final-mascot .st-hand, .ln-final-mascot .st-mark { animation: none; } .ln-final-mascot .st-hand { transform: translateY(-4px); } }

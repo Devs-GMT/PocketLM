@@ -2,7 +2,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { MascotIcon } from "@/components/MascotArt";
+import { FaceIcon, MascotIcon } from "@/components/MascotArt";
 import { skipTour, useTourState, writeTour } from "@/lib/tour";
 
 // Four coach marks. The first two show on Home right after "Show me around"; the other two wait until the
@@ -146,7 +146,7 @@ export default function Tour() {
         style={pos ? { top: pos.top, left: pos.left, width: pos.w } : { top: 0, left: 0, width: Math.min(330, window.innerWidth - 24), visibility: "hidden" }}
       >
         <div className="ob-head">
-          <MascotIcon size={26} idp="obp" />
+          <FaceIcon size={26} idp="obp" />
           <span>Step {state.step + 1} of {STEPS.length}</span>
         </div>
         <h2>{step.title}</h2>

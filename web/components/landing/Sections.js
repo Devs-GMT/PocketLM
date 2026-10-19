@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Lock, Fingerprint, Feather, Pencil } from "@/components/Icons";
-import { MascotIcon } from "@/components/MascotArt";
+import { StampScene } from "@/components/MascotArt";
 import Listen from "@/components/landing/ListenMini";
 import LiveReceipt from "@/components/landing/LiveReceipt";
 import { AskDemo, StampToy } from "@/components/landing/FeatureToys";
@@ -268,7 +268,7 @@ export function FinalCta() {
         <div className="ln-final-card" data-guide-avoid data-reveal="scale">
           <span className="ln-tape" aria-hidden="true" />
           <div className="ln-final-mascot" aria-hidden="true">
-            <MascotIcon size={132} idp="fin" />
+            <StampScene size={210} idp="fin" />
           </div>
           <div>
             <p className="ln-note">little by little…</p>

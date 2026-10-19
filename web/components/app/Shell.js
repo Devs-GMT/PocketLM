@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MascotIcon } from "@/components/MascotArt";
+import { FaceIcon } from "@/components/MascotArt";
 import Tour from "@/components/app/Tour";
 import WalletMenu from "@/components/app/WalletMenu";
 import { NETWORK } from "@/lib/config";
@@ -36,7 +36,7 @@ export default function Shell({ children }) {
     <div className="ap">
       <aside className="ap-side">
         <Link href="/" className="ap-logo" aria-label="PocketLM home page">
-          <MascotIcon size={30} idp="aps" />
+          <FaceIcon size={30} idp="aps" />
           <span>PocketLM</span>
         </Link>
         <Link href="/app/new" className="ap-newbtn">
@@ -57,7 +57,7 @@ export default function Shell({ children }) {
       <div className="ap-main">
         <header className="ap-top">
           <Link href="/" className="ap-logo" aria-label="PocketLM home page">
-            <MascotIcon size={26} idp="apt" />
+            <FaceIcon size={26} idp="apt" />
             <span>PocketLM</span>
           </Link>
           <WalletMenu />
